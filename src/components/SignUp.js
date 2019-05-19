@@ -8,22 +8,22 @@ import CustomInput from './CustomInput';
 class SignUp extends Component {
   
   //use arrow functions for automatic binding this keyword
-  onSubmit=async (formData)=> { 
+  onSubmit=async (formData)=> {
     //we need to call some actioncreators
     console.log(formData);
   }
-  
+ 
   render() {
     const {handleSubmit}=this.props;
     return (
       <div className="container">
         <div className="row">
-          <div className="col-lg-6">
+          <div className="col-lg-6 m-auto">
             <form onSubmit={handleSubmit(this.onSubmit)}>
               <fieldset>
                 <Field
                   name="email"
-                  type="text"
+                  type="email"
                   id="email"
                   label="Enter your email"
                   placeholder="example@example.com"
@@ -35,14 +35,23 @@ class SignUp extends Component {
                   type="password"
                   id="password"
                   label="Enter your password"
-                  placeholder="yoursuperpassword"
+                  placeholder="*****"
+                  component= {CustomInput} />
+              </fieldset>
+              <fieldset>
+                <Field
+                  name="name"
+                  type="text"
+                  id="name"
+                  label="Enter your name"
+                  placeholder="Name"
                   component= {CustomInput} />
               </fieldset>
 
-              { this.props.errorMessage ? 
+              {/* { this.props.errorMessage ? 
                 <div className="alert alert-danger">{ this.props.errorMessage }</div>
                 : null 
-              }
+              } */}
 
               <button type="submit" className="btn btn-primary">Sign Up</button>
             </form>
@@ -55,4 +64,4 @@ class SignUp extends Component {
 
 
 
-export default compose(reduxForm({ form: 'signup' }))(SignUp);
+export default reduxForm({ form: 'signup' })(SignUp);
