@@ -3,16 +3,21 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import * as actions from '../actions';
 import CustomInput from './CustomInput';
 
 class SignIn extends Component {
   
   //use arrow functions for automatic binding this keyword
-  onSubmit=async (formData)=> {
+  onSubmit=async (formData)=> { 
     //we need to call some actioncreators
     console.log(formData);
+    await this.props.signIn(formData);
+    if (this.props.isAuthenticated){
+      this.props.history.push('/dashboard');
+    }
   }
-  
+ 
   render() {
     const {handleSubmit}=this.props;
     return (
@@ -39,10 +44,10 @@ class SignIn extends Component {
                   component= {CustomInput} />
               </fieldset>
 
-              {/* { this.props.errorMessage ? 
+              { this.props.errorMessage ? 
                 <div className="alert alert-danger">{ this.props.errorMessage }</div>
                 : null 
-              } */}
+              }
 
               <button type="submit" className="btn btn-primary">Sign In</button>
             </form>
@@ -53,6 +58,14 @@ class SignIn extends Component {
   }
 }
 
+function mapStateToProps (state) {
+  return {
+    errorMessage: state.auth.errorMessage,
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
 
-
-export default reduxForm({ form: 'signin' })(SignIn);
+export default compose(
+  connect( mapStateToProps, actions ),
+  reduxForm({ form: 'signin' })
+)(SignIn);

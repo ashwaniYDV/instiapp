@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
+import * as actions from '../actions';
 
 class Header extends Component {
+
+  signOut = () => {
+    this.props.signOut();
+  }
 
   render() {
     return (
@@ -11,28 +19,42 @@ class Header extends Component {
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
+
+          { this.props.isAuthenticated ? 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                 <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
                 </li>
                 <li className="nav-item">
-                <NavLink className="nav-link" to="/signout">Sign Out</NavLink>
+                <NavLink className="nav-link" to="/" onClick={this.signOut}>Sign Out</NavLink>
                 </li>
             </ul>
-            <ul className="nav navbar-nav ml-auto">
-              <li className="nav-item" key="signin">
-              <NavLink className="nav-link" to="/signin">Sign In</NavLink>
-              </li>
-              <li className="nav-item" key="signin">
-              <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
-              </li>
-            </ul>
           </div>
+          :
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                <NavLink className="nav-link" to="/signin">Sign In</NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink className="nav-link" to="/signup">Sign Up</NavLink>
+                </li>
+            </ul>
+          </div> }
         </div>
       </nav>
     );
   }
 }
 
-export default withRouter(Header);
+function mapStateToProps (state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+export default compose(
+  connect( mapStateToProps, actions ),
+  withRouter
+)(Header);
