@@ -11,7 +11,8 @@ class Dashboard extends Component {
     console.log(this.state.user);
     return (
       <div className="container">
-        {this.state.user ? <p>{this.state.user.name}</p> : <p>Loading..</p> }
+        <p>Name: {this.state.user.name}</p>
+        <p>InstituteId: {this.state.user.instituteId}</p>
       </div>
     );
   }

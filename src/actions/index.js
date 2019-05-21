@@ -14,6 +14,7 @@ export const signUp = (data) => {
             });
 
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('USER', JSON.stringify(res.data.user));
 
         } catch (err) {
             console.log(err.response.data.message);
@@ -39,6 +40,7 @@ export const signIn = (data) => {
             });
 
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('USER', JSON.stringify(res.data.user));
 
         } catch (err) {
             console.log(err.response.data.error.message);
@@ -55,6 +57,7 @@ export const signIn = (data) => {
 export const signOut = () => {
     return (dispatch) => {
         localStorage.removeItem('JWT_TOKEN');
+        localStorage.removeItem('USER');
 
         dispatch({
             type: AUTH_SIGN_OUT,

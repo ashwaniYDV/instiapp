@@ -10,11 +10,13 @@ import App from './App';
 import reducers from './reducers';
 
 const JWT_TOKEN=localStorage.getItem('JWT_TOKEN');
+const USER=JSON.parse(localStorage.getItem('USER'));
 
 ReactDOM.render(<Provider store={createStore(reducers, {
     auth: {
         token: JWT_TOKEN,
-        isAuthenticated: JWT_TOKEN ? true : false
+        isAuthenticated: JWT_TOKEN ? true : false,
+        user: USER
     }
 }, applyMiddleware(reduxThunk))}><App /></Provider>, document.getElementById('root'));
 
