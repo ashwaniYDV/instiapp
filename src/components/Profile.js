@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions/authActions';
+import {updateUser} from '../actions/userActions';
 
 class Profile extends Component {
   state={
@@ -55,10 +55,10 @@ class Profile extends Component {
     })
     const update={
       updatedUser: body,
-      //userId: this.props.authUser.id
+      userId: this.props.authUser.id
     }
     console.log(update);
-    //this.props.updatedUser(update);
+    this.props.updateUser(update);
   }
 
   render() {
@@ -151,7 +151,7 @@ class Profile extends Component {
       ): null
 
 
-    );//
+    );
   }
 }
 
@@ -162,4 +162,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect( mapStateToProps, actions )(Profile);
+export default connect( mapStateToProps, { updateUser } )(Profile);
