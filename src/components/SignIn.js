@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import * as actions from '../actions';
+import * as actions from '../actions/authActions';
 import CustomInput from './CustomInput';
 
 class SignIn extends Component {
@@ -14,7 +14,7 @@ class SignIn extends Component {
     console.log(formData);
     await this.props.signIn(formData);
     if (this.props.isAuthenticated){
-      this.props.history.push('/dashboard');
+      this.props.history.push('/profile');
     }
   }
  

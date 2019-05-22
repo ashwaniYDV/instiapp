@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-import Dashboard from './components/Dashboard';
+import Profile from './components/Profile';
 
 const App = () => {
     return(
@@ -16,7 +16,7 @@ const App = () => {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/signin" component={SignIn} />
                     <Route exact path="/signup" component={SignUp} />
-                    <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/profile" component={Profile} />
                 </Switch>
             </div>
         </BrowserRouter>
