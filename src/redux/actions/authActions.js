@@ -1,10 +1,12 @@
 import Axios from "axios";
 import { AUTH_SIGN_UP, AUTH_SIGN_IN, AUTH_ERROR, AUTH_SIGN_OUT } from "./types";
 
+import {serverUrl} from '../../helper/url';
+
 export const signUp = (data) => {
     return async (dispatch) => {
         try {
-            const res = await Axios.post('https://notifications-server-iitp.herokuapp.com/users/signup', data);
+            const res = await Axios.post(`${serverUrl}/users/signup`, data);
 
             dispatch({
                 type: AUTH_SIGN_UP,
@@ -27,7 +29,7 @@ export const signUp = (data) => {
 export const signIn = (data) => {
     return async (dispatch) => {
         try {
-            const res = await Axios.post('https://notifications-server-iitp.herokuapp.com/users/signin', data);
+            const res = await Axios.post(`${serverUrl}/users/signin`, data);
 
             dispatch({
                 type: AUTH_SIGN_IN,

@@ -1,0 +1,1 @@
+export const serverUrl = "https://notifications-server-iitp.herokuapp.com";

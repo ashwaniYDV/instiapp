@@ -1,10 +1,12 @@
 import Axios from "axios";
 import { USER_UPDATE, USER_LOADED } from "./types";
 
+import {serverUrl} from '../../helper/url';
+
 export const updateUser = ({ updatedUser, userId }) => {
     return async (dispatch, getState) => {
         try {
-          const res = await Axios.patch(`https://notifications-server-iitp.herokuapp.com/users/${userId}`, updatedUser, tokenConfig(getState));
+          const res = await Axios.patch(`${serverUrl}/users/${userId}`, updatedUser, tokenConfig(getState));
           console.log(res.data);
           console.log(res.status);
 

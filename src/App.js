@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { BrowserRouter, Route ,Switch } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -10,7 +10,7 @@ import Profile from './components/Profile';
 const App = () => {
     return(
         <BrowserRouter>
-            <div>
+            <Fragment>
                 <Header />
                 <Switch>
                     <Route exact path="/" component={Home} />
@@ -18,7 +18,7 @@ const App = () => {
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/profile" component={Profile} />
                 </Switch>
-            </div>
+            </Fragment>
         </BrowserRouter>
     )
 }
