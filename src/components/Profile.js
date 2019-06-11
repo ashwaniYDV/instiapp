@@ -5,9 +5,9 @@ import {updateUser} from '../actions/userActions';
 
 class Profile extends Component {
   state={
-    email: this.props.authUser.email,
-    instituteId: this.props.authUser.instituteId,
-    name: this.props.authUser.name,
+    email: this.props.user.email,
+    instituteId: this.props.user.instituteId,
+    name: this.props.user.name,
     newpassword: "",
     confnewpassword: "",
     alertMessage: ""
@@ -55,25 +55,23 @@ class Profile extends Component {
     })
     const update={
       updatedUser: body,
-      userId: this.props.authUser.id
+      userId: this.props.user._id
     }
-    console.log(update);
     this.props.updateUser(update);
   }
 
   render() {
-    console.log(this.state.user);
     const { email, name, newpassword, confnewpassword, instituteId, alertMessage } = this.state;
     return (
       this.props.isAuthenticated ? (
         <div className="container">
           <div className="row">
             <div className="col">
-              <p>Name: {this.props.authUser.name}</p>
-              <p>Email: {this.props.authUser.email}</p>
-              <p>InstituteId: {this.props.authUser.instituteId}</p>
-              <p>Batch: {this.props.authUser.batch}</p>
-              <p>Branch: {this.props.authUser.branch}</p>
+              <p>Name: {this.props.user.name}</p>
+              <p>Email: {this.props.user.email}</p>
+              <p>InstituteId: {this.props.user.instituteId}</p>
+              <p>Batch: {this.props.user.batch}</p>
+              <p>Branch: {this.props.user.branch}</p>
             </div>
           </div>
           <h3 className="text-center">Update Profile</h3>
@@ -158,7 +156,7 @@ class Profile extends Component {
 function mapStateToProps (state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    authUser: state.auth.user
+    user: state.user.user
   }
 }
 

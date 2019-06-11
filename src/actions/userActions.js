@@ -2,29 +2,40 @@ import Axios from "axios";
 import { USER_UPDATE } from "./types";
 
 export const updateUser = ({ updatedUser, userId }) => {
-    console.log(updatedUser);
-    // return async (dispatch) => {
-    //     try {
-    //         const res = await Axios.post('http://localhost:5000/users/signup', data);
-    //         console.log(res.data);
-    //         console.log(res.status);
+    return async (dispatch, getState) => {
+        try {
+          const res = await Axios.patch(`https://notifications-server-iitp.herokuapp.com/${userId}`, updatedUser, tokenConfig(getState));
+          console.log(res.data);
+          console.log(res.status);
 
-    //         dispatch({
-    //             type: AUTH_SIGN_UP,
-    //             payload: {token: res.data.token, user: res.data.user, status: res.status}
-    //         });
+          dispatch({
+              type: USER_UPDATE,
+              payload: { user: res.data.user, status: res.status}
+          });
 
-    //         localStorage.setItem('JWT_TOKEN', res.data.token);
-    //         localStorage.setItem('USER', JSON.stringify(res.data.user));
+          localStorage.setItem('USER', JSON.stringify(res.data.user));
 
-    //     } catch (err) {
-    //         console.log(err.response.data.message);
-    //         console.log(err.response.status);
+        } catch (err) {
+            console.log(err.response.data);
+            console.log(err.response.status);
 
-    //         dispatch({
-    //             type: AUTH_ERROR,
-    //             payload: {status: err.response.status, errorMessage: err.response.data.message}
-    //         });
-    //     }
-    // }
+            // dispatch({
+            //     type: AUTH_ERROR,
+            //     payload: {status: err.response.status, errorMessage: err.response.data.message}
+            // });
+        }
+    }
 }
+
+const tokenConfig = getState => {
+    const token = getState().auth.token;
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    if (token) {
+      config.headers['Authorization'] = token;
+    }
+    return config;
+  }
