@@ -3,7 +3,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import * as actions from '../actions/authActions';
+import * as actions from '../redux/actions/authActions';
 
 class Header extends Component {
 

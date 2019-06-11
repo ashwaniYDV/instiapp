@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import * as actions from '../actions/authActions';
+import * as actions from '../redux/actions/authActions';
 import CustomInput from './CustomInput';
 
 class SignIn extends Component {

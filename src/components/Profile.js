@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {updateUser} from '../actions/userActions';
+import {updateUser} from '../redux/actions/userActions';
 
 class Profile extends Component {
   state={
@@ -156,7 +156,7 @@ class Profile extends Component {
 function mapStateToProps (state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    user: state.user.user
+    user: state.auth.user
   }
 }
 

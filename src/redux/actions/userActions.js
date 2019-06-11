@@ -1,10 +1,10 @@
 import Axios from "axios";
-import { USER_UPDATE } from "./types";
+import { USER_UPDATE, USER_LOADED } from "./types";
 
 export const updateUser = ({ updatedUser, userId }) => {
     return async (dispatch, getState) => {
         try {
-          const res = await Axios.patch(`https://notifications-server-iitp.herokuapp.com/${userId}`, updatedUser, tokenConfig(getState));
+          const res = await Axios.patch(`https://notifications-server-iitp.herokuapp.com/users/${userId}`, updatedUser, tokenConfig(getState));
           console.log(res.data);
           console.log(res.status);
 
@@ -12,6 +12,10 @@ export const updateUser = ({ updatedUser, userId }) => {
               type: USER_UPDATE,
               payload: { user: res.data.user, status: res.status}
           });
+          dispatch({
+            type: USER_LOADED,
+            payload: { user: res.data.user, status: res.status}
+        });
 
           localStorage.setItem('USER', JSON.stringify(res.data.user));
 
