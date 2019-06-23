@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {AppBar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar,Typography} from '@material-ui/core';
+import {AppBar, Avatar, CssBaseline, Divider, Drawer, Grid, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar,Typography} from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -46,6 +46,10 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
+  avatar: {
+    color: '#fff',
+    backgroundColor: 'purple',
+  },
 });
 
 class Home extends React.Component {
@@ -62,7 +66,10 @@ class Home extends React.Component {
 
     const drawer = (
       <div>
-        <div className={classes.toolbar} style={{background: '#2196f3'}}></div>
+        <div className={classes.toolbar} style={{background: '#2196f3', padding: '5px', display: 'flex', alignItems: 'center'}}>
+          <Avatar className={classes.avatar}><InboxIcon /></Avatar>
+          <span style={{margin: '5px'}}>{isAuthenticated ? user.name.split(' ')[0] : "Guest User"}</span>
+        </div>
         <Divider />
         <List>
           {isAuthenticated ? 
