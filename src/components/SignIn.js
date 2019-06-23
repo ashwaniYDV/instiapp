@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
+import 'antd/dist/antd.css';
+import './LoginModal.css';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import {signIn} from '../redux/actions/authActions';
-import CustomInput from './CustomInput';
+import { signIn } from "../redux/actions/authActions";
+import { clearErrors } from "../redux/actions/errorActions";
+import { Form, Input, Icon, Alert, Button } from "antd";
 
 class SignIn extends Component {
-
   state = {
-    msg: ''
-  }
+    msg: null
+  };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
-    error: PropTypes.object.isRequired
+    error: PropTypes.object.isRequired,
+    signIn: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired
   };
 
-  componentDidUpdate = (prevProps) => {
-    const { error } = this.props;
+  componentDidUpdate(prevProps) {
+    const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
       if (error.id === "LOGIN_FAIL") {
         this.setState({
@@ -32,68 +34,80 @@ class SignIn extends Component {
       }
     }
   }
-  
-  //use arrow functions for automatic binding this keyword
-  onSubmit=async (formData)=> { 
-    //we need to call some actioncreators
-    console.log(formData);
-    await this.props.signIn(formData);
+
+  handleCreate = async ({email,password}) => {
+    const user = {
+      email,
+      password,
+    };
+
+    await this.props.signIn(user);
     if (this.props.isAuthenticated){
       this.props.history.push('/profile');
     }
+  };
+  onEnterKeyPress = (e)=>{
+    if(e.key === 'Enter'){
+      this.handleSubmit(e)
+    }
   }
- 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.handleCreate(values);
+      }
+    });
+  };
+
+
   render() {
-    const {handleSubmit}=this.props;
-    console.log(this.props.error);
+    const { msg } = this.state;
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-6 m-auto">
-            <form onSubmit={handleSubmit(this.onSubmit)}>
-              <fieldset>
-                <Field
-                  name="email"
-                  type="email"
-                  id="email"
-                  label="Enter your email"
-                  placeholder="example@example.com"
-                  component= {CustomInput} />
-              </fieldset>
-              <fieldset>
-                <Field
-                  name="password"
-                  type="password"
-                  id="password"
-                  label="Enter your password"
-                  placeholder="*****"
-                  component= {CustomInput} />
-              </fieldset>
+      <div>
+        <Form layout="vertical" className="login-form" onSubmit={this.handleSubmit} onKeyPress={this.onEnterKeyPress}>
+          {msg ? <Alert message={msg} type="error" /> : null}
+          <br/>
+          <Form.Item>
+            {getFieldDecorator('email', {
+              rules: [{ required: true, message: 'Please enter your email!' }, { type: 'email', message: 'Please enter valid email!' },],
+            })(
+              <Input
+              type="email"
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Email"
+              />,
+            )}
+          </Form.Item>
 
-              { this.state.msg ? 
-                <div className="alert alert-danger">{ this.state.msg }</div>
-                : null 
-              }
-
-              <button type="submit" className="btn btn-primary">Sign In</button>
-            </form>
-          </div>
-        </div>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [{ required: true, message: 'Please input your Password!' }],
+            })(
+              <Input
+                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Password"
+                type="password"
+              />,
+            )}
+          </Form.Item>
+          <Button key="submit" type="primary" loading={this.props.isLoading} onClick={this.handleSubmit}>
+            Login
+          </Button>
+        </Form>
       </div>
     );
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-    error: state.error,
-    errorMessage: state.error.message,
-    errorId: state.error.id,
-  }
-}
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading,
+  error: state.error
+});
 
 export default compose(
-  connect( mapStateToProps, {signIn} ),
-  reduxForm({ form: 'signin' })
+  connect(mapStateToProps,{ signIn, clearErrors }),
+  Form.create({ name: 'normal_login' })
 )(SignIn);

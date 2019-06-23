@@ -40,8 +40,10 @@ export const signUp = (data) => {
 export const signIn = (data) => {
     return async (dispatch) => {
         try {
+            dispatch({
+                type: USER_LOADING
+            });
             const res = await Axios.post(`${serverUrl}/users/signin`, data);
-
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: {token: res.data.token, user: res.data.user, status: res.status}
