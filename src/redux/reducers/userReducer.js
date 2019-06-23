@@ -9,7 +9,8 @@ export default (state=DEFAULT_STATE,action)=>{
     switch(action.type) {
         case USER_UPDATE:
             return {
-                ...state, user: action.payload.user,
+                ...state, 
+                user: action.payload.user,
                 status: action.payload.status
             }
         default:

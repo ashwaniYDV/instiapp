@@ -18,7 +18,6 @@ class Profile extends Component {
     //we need to call some actioncreators
     await this.props.signOut();
     if(!this.props.isAuth) {
-      console.log("bahar aao");
       this.props.history.push('/');
     }
   }

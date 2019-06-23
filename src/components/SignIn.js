@@ -2,11 +2,36 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import PropTypes from 'prop-types';
 
-import * as actions from '../redux/actions/authActions';
+import {signIn} from '../redux/actions/authActions';
 import CustomInput from './CustomInput';
 
 class SignIn extends Component {
+
+  state = {
+    msg: ''
+  }
+
+  static propTypes = {
+    isAuthenticated: PropTypes.bool,
+    error: PropTypes.object.isRequired
+  };
+
+  componentDidUpdate = (prevProps) => {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      if (error.id === "LOGIN_FAIL") {
+        this.setState({
+          msg: error.message
+        });
+      } else {
+        this.setState({
+          msg: null
+        });
+      }
+    }
+  }
   
   //use arrow functions for automatic binding this keyword
   onSubmit=async (formData)=> { 
@@ -20,6 +45,7 @@ class SignIn extends Component {
  
   render() {
     const {handleSubmit}=this.props;
+    console.log(this.props.error);
     return (
       <div className="container">
         <div className="row">
@@ -44,8 +70,8 @@ class SignIn extends Component {
                   component= {CustomInput} />
               </fieldset>
 
-              { this.props.errorMessage ? 
-                <div className="alert alert-danger">{ this.props.errorMessage }</div>
+              { this.state.msg ? 
+                <div className="alert alert-danger">{ this.state.msg }</div>
                 : null 
               }
 
@@ -60,12 +86,14 @@ class SignIn extends Component {
 
 function mapStateToProps (state) {
   return {
-    errorMessage: state.auth.errorMessage,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.error,
+    errorMessage: state.error.message,
+    errorId: state.error.id,
   }
 }
 
 export default compose(
-  connect( mapStateToProps, actions ),
+  connect( mapStateToProps, {signIn} ),
   reduxForm({ form: 'signin' })
 )(SignIn);
