@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {updateUser} from '../redux/actions/userActions';
+import {signOut} from '../redux/actions/authActions';
 
 class Profile extends Component {
   state={
-    email: this.props.user.email,
-    instituteId: this.props.user.instituteId,
-    name: this.props.user.name,
-    newpassword: "",
-    confnewpassword: "",
-    alertMessage: ""
+    email: '',
+    instituteId: '',
+    name: '',
+    newpassword: '',
+    confnewpassword: '',
+    alertMessage: ''
+  }
+
+  signOut= async ()=> {
+    //we need to call some actioncreators
+    await this.props.signOut();
+    if(!this.props.isAuth) {
+      console.log("bahar aao");
+      this.props.history.push('/');
+    }
   }
 
   onChange=(e)=>{
@@ -61,7 +71,9 @@ class Profile extends Component {
   }
 
   render() {
-    const { email, name, newpassword, confnewpassword, instituteId, alertMessage } = this.state;
+    const { newpassword, confnewpassword, alertMessage } = this.state;
+    const { email, name, instituteId } = this.props.user;
+    
     return (
       this.props.isAuthenticated ? (
         <div className="container">
@@ -73,6 +85,7 @@ class Profile extends Component {
               <p>Batch: {this.props.user.batch}</p>
               <p>Branch: {this.props.user.branch}</p>
             </div>
+            <button className="btn btn-danger" onClick={this.signOut}>SignOut</button>
           </div>
           <h3 className="text-center">Update Profile</h3>
           <div className="row d-flex justify-content-center">
@@ -88,7 +101,7 @@ class Profile extends Component {
                       placeholder="Enter email"
                       className="form-control"
                       type="email"
-                      value={ email }
+                      defaultValue={ email }
                       onChange={ this.onChange }
                     />
                   </div>
@@ -100,7 +113,7 @@ class Profile extends Component {
                       placeholder="Enter name"
                       className="form-control"
                       type="text"
-                      value={ name }
+                      defaultValue={ name }
                       onChange={ this.onChange }
                     />
                   </div>
@@ -112,7 +125,7 @@ class Profile extends Component {
                       placeholder="Enter instituteId"
                       className="form-control"
                       type="text"
-                      value={ instituteId }
+                      defaultValue={ instituteId }
                       onChange={ this.onChange }
                     />
                   </div>
@@ -146,8 +159,8 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-      ): null
-
+      ): 
+      <h3 className="text-center text-danger">Please login again!</h3>
 
     );
   }
@@ -160,4 +173,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect( mapStateToProps, { updateUser } )(Profile);
+export default connect( mapStateToProps, { updateUser, signOut } )(Profile);

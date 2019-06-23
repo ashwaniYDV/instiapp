@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -165,9 +165,7 @@ function mapStateToProps (state) {
   }
 }
 
-// export default withStyles(styles, { withTheme: true })(Home);
-
+const WrappedHome=withRouter(connect( mapStateToProps, {} )(Home));
 export default compose(
-  connect( mapStateToProps, {} ),
-  withStyles(styles, { withTheme: true })
-)(Home);
+  withStyles(styles, { withTheme: true }),
+)(WrappedHome);
