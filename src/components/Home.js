@@ -65,19 +65,23 @@ class Home extends React.Component {
         <div className={classes.toolbar} style={{background: '#2196f3'}}></div>
         <Divider />
         <List>
-          {}
-          <ListItem button key='profile' component={Link} to='/profile' >
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-            <ListItemText primary='Profile' />
-          </ListItem>
-          <ListItem button key='signup' component={Link} to='/signup' >
-            <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary='Signup' />
-          </ListItem>
-          <ListItem button key='signin' component={Link} to='/signin' >
-            <ListItemIcon><InboxIcon /></ListItemIcon>
-            <ListItemText primary='Signin' />
-          </ListItem>
+          {isAuthenticated ? 
+            <ListItem button key='profile' component={Link} to='/profile' >
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary='Profile' />
+            </ListItem>
+            :
+            [
+              <ListItem button key='signup' component={Link} to='/signup' >
+                <ListItemIcon><MailIcon /></ListItemIcon>
+                <ListItemText primary='Signup' />
+              </ListItem>,
+              <ListItem button key='signin' component={Link} to='/signin' >
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText primary='Signin' />
+              </ListItem>
+            ]
+          }
         </List>
         <Divider />
         <List>
