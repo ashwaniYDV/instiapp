@@ -18,6 +18,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Profile from './Profile';
 import LoginModal from './LoginModal/LoginModal';
+import RegisterModal from './RegisterModal/RegisterModal';
 
 import { openLoginModal } from "../redux/actions/authActions";
 
@@ -160,6 +161,7 @@ class Home extends React.Component {
               <Button color="inherit" onClick={this.openLoginModal}>Login</Button>
             )}
             {openloginModal ? <LoginModal /> : null}
+            {openregisterModal ? <RegisterModal /> : null}
 
             {isAuthenticated && (
               <div>

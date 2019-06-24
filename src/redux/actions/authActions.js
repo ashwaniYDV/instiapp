@@ -21,18 +21,19 @@ import {serverUrl} from '../../helper/url';
 export const signUp = (data) => {
     return async (dispatch) => {
         try {
-            const res = await Axios.post(`${serverUrl}/users/signup`, data);
-
-            dispatch({
-                type: REGISTER_SUCCESS,
-                payload: {token: res.data.token, user: res.data.user, status: res.status}
-            });
+          dispatch({
+            type: USER_LOADING
+          });
+          const res = await Axios.post(`${serverUrl}/users/signup`, data);
+          dispatch({
+              type: REGISTER_SUCCESS,
+              payload: {token: res.data.token, user: res.data.user, status: res.status}
+          });
         } catch (err) {
-            
-            dispatch({
-                type: AUTH_ERROR,
-                payload: {status: err.response.status, errorMessage: err.response.data.message}
-            });
+          dispatch(
+            returnErrors(err.response.data.error.message, err.response.status, "REGISTER_FAIL")
+          );
+          dispatch({ type: REGISTER_FAIL });
         }
     }
 }
