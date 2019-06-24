@@ -17,6 +17,11 @@ import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import Feeds from '../Feeds/Feeds';
 import Clubs from '../Clubs/Clubs';
+import MessMenu from '../MessMenu/MessMenu';
+import Calendar from '../Calendar/Calendar';
+import Map from '../Map/Map';
+import UsefulLinks from '../UsefulLinks/UsefulLinks';
+import Qrcode from '../Qrcode/Qrcode';
 
 import { openLoginModal } from "../../redux/actions/authActions";
 import {signOut} from '../../redux/actions/authActions';
@@ -102,7 +107,8 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log(this.props.history);
+    let title = this.props.history.location.pathname.split('/')[1];
+    title = title.charAt(0).toUpperCase() + title.slice(1);
     const { classes, theme } = this.props;
     const {
       isAuthenticated,
@@ -129,11 +135,33 @@ class Home extends React.Component {
             <Icon type="star" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
             <ListItemText primary='Clubs' />
           </ListItem>
+          <ListItem button key='messmenu' component={Link} to='/mess-menu' onClick={this.handleDrawerClose} >
+            <Icon type="pie-chart" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+            <ListItemText primary='Mess-menu' />
+          </ListItem>
+          <ListItem button key='calender' component={Link} to='/calendar' onClick={this.handleDrawerClose} >
+            <Icon type="calendar" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+            <ListItemText primary='Calender' />
+          </ListItem>
+          <ListItem button key='map' component={Link} to='/map' onClick={this.handleDrawerClose} >
+            <Icon type="environment" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+            <ListItemText primary='Map' />
+          </ListItem>
+          <ListItem button key='usefullinks' component={Link} to='/useful-links' onClick={this.handleDrawerClose} >
+            <Icon type="link" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+            <ListItemText primary='Useful Links' />
+          </ListItem>
           {isAuthenticated ? 
-            <ListItem button key='profile' component={Link} to='/profile' onClick={this.handleDrawerClose} >
-              <Icon type="user" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
-              <ListItemText primary='Profile' />
-            </ListItem>
+            [
+              <ListItem button key='profile' component={Link} to='/profile' onClick={this.handleDrawerClose} >
+                <Icon type="user" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+                <ListItemText primary='Profile' />
+              </ListItem>,
+              <ListItem button key='qrcode' component={Link} to='/qrcode' onClick={this.handleDrawerClose} >
+                <Icon type="qrcode" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+                <ListItemText primary='QR-Code' />
+              </ListItem>
+            ]
             :
             [
 
@@ -164,7 +192,7 @@ class Home extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
-              Responsive drawer
+              {title !='' ? title : 'Instiapp'}
             </Typography>
 
             {!isAuthenticated && (
@@ -240,6 +268,11 @@ class Home extends React.Component {
           <Switch>
             <Route exact path="/feeds" component={Feeds} />
             <Route exact path="/clubs" component={Clubs} />
+            <Route exact path="/calendar" component={Calendar} />
+            <Route exact path="/mess-menu" component={MessMenu} />
+            <Route exact path="/map" component={Map} />
+            <Route exact path="/qrcode" component={Qrcode} />
+            <Route exact path="/useful-links" component={UsefulLinks} />
             <Route exact path="/profile" component={Profile} />
           </Switch>
         </main>
