@@ -44,7 +44,6 @@ class LoginModal extends Component {
 
     if (this.state.visible) {
       if (isAuthenticated) {
-        console.log("hello");
         this.toggleModal();
       }
     }
@@ -64,11 +63,7 @@ class LoginModal extends Component {
       email,
       password,
     };
-
-    await this.props.signIn(user);
-    if(this.props.isAuthenticated){
-      this.props.history.push('/profile');
-    }
+    this.props.signIn(user);
   };
   onEnterKeyPress = (e)=>{
     if(e.key === 'Enter'){

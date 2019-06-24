@@ -4,11 +4,14 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {AppBar, Avatar, CssBaseline, Divider, Drawer, Grid, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar,Typography} from '@material-ui/core';
+import {AppBar, Avatar, Button, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar,Typography} from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
+
+// import 'antd/dist/antd.css';
+// import {  Button } from "antd";
 
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -22,6 +25,9 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: 'flex',
+  },
+  grow: {
+    flexGrow: 1,
   },
   drawer: {
     [theme.breakpoints.up('sm')]: {
@@ -134,10 +140,10 @@ class Home extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
               Responsive drawer
             </Typography>
-            <button onClick={this.openLoginModal}>Login</button>
+            <Button color="inherit" onClick={this.openLoginModal}>Login</Button>
             {openloginModal ? <LoginModal /> : null}
           </Toolbar>
         </AppBar>
