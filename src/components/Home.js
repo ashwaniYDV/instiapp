@@ -4,10 +4,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {AppBar, Avatar, Button, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar,Typography} from '@material-ui/core';
+import {AppBar, Avatar, Button, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar,Typography} from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import { withStyles } from '@material-ui/core/styles';
 
 // import 'antd/dist/antd.css';
@@ -65,7 +66,8 @@ class Home extends React.Component {
 
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    openLoginModal: PropTypes.func.isRequired
+    openLoginModal: PropTypes.func.isRequired,
+    anchorEl: null,
   };
 
   state = {
@@ -80,6 +82,14 @@ class Home extends React.Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
 
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   render() {
     const { classes, theme } = this.props;
     const {
@@ -88,6 +98,8 @@ class Home extends React.Component {
       openloginModal,
       openregisterModal
     } = this.props.auth;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
 
     const drawer = (
       <div>
@@ -143,8 +155,42 @@ class Home extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
               Responsive drawer
             </Typography>
-            <Button color="inherit" onClick={this.openLoginModal}>Login</Button>
+
+            {!isAuthenticated && (
+              <Button color="inherit" onClick={this.openLoginModal}>Login</Button>
+            )}
             {openloginModal ? <LoginModal /> : null}
+
+            {isAuthenticated && (
+              <div>
+                <IconButton
+                  aria-owns={open ? 'menu-appbar' : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem onClick={this.handleClose} component={Link} to='/profile'>Profile</MenuItem>
+                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleClose}>Settings</MenuItem>
+                </Menu>
+              </div>
+            )}
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
