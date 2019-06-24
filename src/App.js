@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import Home from './components/Home';
+import Home from './components/Home/Home';
 
 const App = () => {
     return(

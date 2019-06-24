@@ -12,13 +12,14 @@ import { withStyles } from '@material-ui/core/styles';
 import 'antd/dist/antd.css';
 import {  Avatar, Icon } from "antd";
 
-import Profile from './Profile';
-import LoginModal from './LoginModal/LoginModal';
-import RegisterModal from './RegisterModal/RegisterModal';
-import Feeds from './Feeds/Feeds';
+import Profile from '../Profile/Profile';
+import LoginModal from '../LoginModal/LoginModal';
+import RegisterModal from '../RegisterModal/RegisterModal';
+import Feeds from '../Feeds/Feeds';
+import Clubs from '../Clubs/Clubs';
 
-import { openLoginModal } from "../redux/actions/authActions";
-import {signOut} from '../redux/actions/authActions';
+import { openLoginModal } from "../../redux/actions/authActions";
+import {signOut} from '../../redux/actions/authActions';
 
 const drawerWidth = 240;
 
@@ -237,6 +238,8 @@ class Home extends React.Component {
           <div className={classes.toolbar} />
           <Route exact path="/" component={Feeds} />
           <Switch>
+            <Route exact path="/feeds" component={Feeds} />
+            <Route exact path="/clubs" component={Clubs} />
             <Route exact path="/profile" component={Profile} />
           </Switch>
         </main>

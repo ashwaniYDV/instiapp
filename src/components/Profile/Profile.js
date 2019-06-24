@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {updateUser} from '../redux/actions/userActions';
-import {signOut} from '../redux/actions/authActions';
+import {updateUser} from '../../redux/actions/userActions';
+import {signOut} from '../../redux/actions/authActions';
 
 class Profile extends Component {
   state={
