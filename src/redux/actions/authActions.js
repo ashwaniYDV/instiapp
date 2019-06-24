@@ -71,3 +71,32 @@ export const signOut = () => {
         })
     }
 }
+
+export const openLoginModal = () => dispatch => {
+    dispatch({ type: OPEN_LOGIN_MODAL });
+  };
+  
+  export const closeLoginModal = () => dispatch => {
+    dispatch({ type: CLOSE_LOGIN_MODAL });
+  };
+  
+  export const openRegisterModal = () => dispatch => {
+    dispatch({ type: OPEN_REGISTER_MODAL });
+  };
+  
+  export const closeRegisterModal = () => dispatch => {
+    dispatch({ type: CLOSE_REGISTER_MODAL });
+  };
+  
+  export const tokenConfig = getState => {
+    const token = getState().auth.token;
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    if (token) {
+      config.headers["authorization"] = token;
+    }
+    return config;
+  };

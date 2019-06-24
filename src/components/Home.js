@@ -13,6 +13,9 @@ import { withStyles } from '@material-ui/core/styles';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Profile from './Profile';
+import LoginModal from './LoginModal/LoginModal';
+
+import { openLoginModal } from "../redux/actions/authActions";
 
 const drawerWidth = 240;
 
@@ -53,8 +56,18 @@ const styles = theme => ({
 });
 
 class Home extends React.Component {
+
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    openLoginModal: PropTypes.func.isRequired
+  };
+
   state = {
     mobileOpen: false,
+  };
+
+  openLoginModal = () => {
+    this.props.openLoginModal();
   };
 
   handleDrawerToggle = () => {
@@ -62,7 +75,13 @@ class Home extends React.Component {
   };
 
   render() {
-    const { classes, theme, isAuthenticated, user } = this.props;
+    const { classes, theme } = this.props;
+    const {
+      isAuthenticated,
+      user,
+      openloginModal,
+      openregisterModal
+    } = this.props.auth;
 
     const drawer = (
       <div>
@@ -118,6 +137,8 @@ class Home extends React.Component {
             <Typography variant="h6" color="inherit" noWrap>
               Responsive drawer
             </Typography>
+            <button onClick={this.openLoginModal}>Login</button>
+            {openloginModal ? <LoginModal /> : null}
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
@@ -171,12 +192,11 @@ Home.propTypes = {
 
 function mapStateToProps (state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
-    user: state.auth.user
+    auth: state.auth
   }
 }
 
-const WrappedHome=withRouter(connect( mapStateToProps, {} )(Home));
+const WrappedHome=withRouter(connect( mapStateToProps, {openLoginModal} )(Home));
 export default compose(
   withStyles(styles, { withTheme: true }),
 )(WrappedHome);
