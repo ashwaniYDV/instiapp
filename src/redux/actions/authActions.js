@@ -31,7 +31,7 @@ export const signUp = (data) => {
           });
         } catch (err) {
           dispatch(
-            returnErrors(err.response.data.error.message, err.response.status, "REGISTER_FAIL")
+            returnErrors(err.response.data.message, err.response.status, "REGISTER_FAIL")
           );
           dispatch({ type: REGISTER_FAIL });
         }
@@ -52,7 +52,7 @@ export const signIn = (data) => {
 
         } catch (err) {
             dispatch(
-                returnErrors(err.response.data.error.message, err.response.status, "LOGIN_FAIL")
+                returnErrors(err.response.data.message, err.response.status, "LOGIN_FAIL")
               );
               dispatch({ type: LOGIN_FAIL });
 

@@ -58,7 +58,7 @@ class LoginModal extends Component {
     this.toggleModal();
   };
 
-  handleCreate = async ({email,password}) => {
+  handleCreate = ({email,password}) => {
     const user = {
       email,
       password,

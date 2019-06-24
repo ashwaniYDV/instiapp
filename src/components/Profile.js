@@ -15,9 +15,8 @@ class Profile extends Component {
   }
 
   signOut= async ()=> {
-    //we need to call some actioncreators
     await this.props.signOut();
-    if(!this.props.isAuth) {
+    if(!this.props.isAuthenticated) {
       this.props.history.push('/');
     }
   }
