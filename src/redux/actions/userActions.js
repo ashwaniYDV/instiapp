@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { USER_UPDATE, USER_LOADED } from "./types";
 
+import { tokenConfig } from './authActions';
 import {serverUrl} from '../../helper/url';
 
 export const updateUser = ({ updatedUser, userId }) => {
@@ -32,16 +33,3 @@ export const updateUser = ({ updatedUser, userId }) => {
         }
     }
 }
-
-const tokenConfig = getState => {
-    const token = getState().auth.token;
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    if (token) {
-      config.headers['Authorization'] = token;
-    }
-    return config;
-  }

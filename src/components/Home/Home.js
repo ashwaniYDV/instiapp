@@ -16,12 +16,14 @@ import Profile from '../Profile/Profile';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import Feeds from '../Feeds/Feeds';
+import Feed from '../Feed/Feed';
 import Clubs from '../Clubs/Clubs';
 import MessMenu from '../MessMenu/MessMenu';
 import Calendar from '../Calendar/Calendar';
 import Map from '../Map/Map';
 import UsefulLinks from '../UsefulLinks/UsefulLinks';
 import Qrcode from '../Qrcode/Qrcode';
+import LostAndFound from '../LostAndFound/LostAndFound';
 
 import { openLoginModal } from "../../redux/actions/authActions";
 import {signOut} from '../../redux/actions/authActions';
@@ -59,7 +61,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    // padding: theme.spacing.unit * 3,
   },
 });
 
@@ -153,24 +155,28 @@ class Home extends React.Component {
           </ListItem>
           {isAuthenticated ? 
             [
-              <ListItem button key='profile' component={Link} to='/profile' onClick={this.handleDrawerClose} >
-                <Icon type="user" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
-                <ListItemText primary='Profile' />
-              </ListItem>,
               <ListItem button key='qrcode' component={Link} to='/qrcode' onClick={this.handleDrawerClose} >
                 <Icon type="qrcode" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
                 <ListItemText primary='QR-Code' />
+              </ListItem>,
+              <ListItem button key='lostandfound' component={Link} to='/lost-n-found' onClick={this.handleDrawerClose} >
+                <Icon type="qrcode" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+                <ListItemText primary='Lost-n-found' />
+              </ListItem>,
+              <ListItem button key='profile' component={Link} to='/profile' onClick={this.handleDrawerClose} >
+                <Icon type="user" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+                <ListItemText primary='Profile' />
               </ListItem>
             ]
             :
             [
-
+              
             ]
           }
         </List>
         <Divider />
         <List>
-            <ListItem button key='settings' onClick={this.handleDrawerClose}>
+            <ListItem button key='settings' component={Link} to='/settings' onClick={this.handleDrawerClose}>
               <Icon type="setting" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
               <ListItemText primary='Setting' />
             </ListItem>
@@ -226,8 +232,6 @@ class Home extends React.Component {
                   onClose={this.handleClose}
                 >
                   <MenuItem onClick={this.handleClose} component={Link} to='/profile'>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                  <MenuItem onClick={this.handleClose}>Settings</MenuItem>
                   <MenuItem onClick={this.handleCloseAndSignout }>Sign Out</MenuItem>
                 </Menu>
               </div>
@@ -262,17 +266,19 @@ class Home extends React.Component {
             </Drawer>
           </Hidden>
         </nav>
-        <main className={classes.content}>
+        <main className={classes.content} >
           <div className={classes.toolbar} />
           <Route exact path="/" component={Feeds} />
           <Switch>
             <Route exact path="/feeds" component={Feeds} />
+            <Route exact path="/feed/:feedId" component={Feed} />
             <Route exact path="/clubs" component={Clubs} />
             <Route exact path="/calendar" component={Calendar} />
             <Route exact path="/mess-menu" component={MessMenu} />
             <Route exact path="/map" component={Map} />
             <Route exact path="/qrcode" component={Qrcode} />
             <Route exact path="/useful-links" component={UsefulLinks} />
+            <Route exact path="/lost-n-found" component={LostAndFound} />
             <Route exact path="/profile" component={Profile} />
           </Switch>
         </main>

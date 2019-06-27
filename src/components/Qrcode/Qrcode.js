@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class Qrcode extends Component {
 
     state={
-        src: ''
+        src: null
     }
 
     componentDidMount = async () => {
@@ -22,10 +22,10 @@ class Qrcode extends Component {
         return (
           isAuthenticated ? (
             <div className="container" style={{display: 'flex', justifyContent: 'center'}}>
-                {this.state.src!='' ? (
+                {this.state.src!==null ? (
                     <img src={this.state.src} />
                 ): (
-                    <div>loading...</div>
+                    <div style={{background: 'red'}}>loading...</div>
                 )
                 }
                 
