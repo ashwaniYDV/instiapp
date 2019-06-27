@@ -16,6 +16,7 @@ import Profile from '../Profile/Profile';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import Feeds from '../Feeds/Feeds';
+import Feed from '../Feed/Feed';
 import Clubs from '../Clubs/Clubs';
 import MessMenu from '../MessMenu/MessMenu';
 import Calendar from '../Calendar/Calendar';
@@ -175,7 +176,7 @@ class Home extends React.Component {
         </List>
         <Divider />
         <List>
-            <ListItem button key='settings' onClick={this.handleDrawerClose}>
+            <ListItem button key='settings' component={Link} to='/settings' onClick={this.handleDrawerClose}>
               <Icon type="setting" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
               <ListItemText primary='Setting' />
             </ListItem>
@@ -265,11 +266,12 @@ class Home extends React.Component {
             </Drawer>
           </Hidden>
         </nav>
-        <main className={classes.content}>
+        <main className={classes.content} >
           <div className={classes.toolbar} />
           <Route exact path="/" component={Feeds} />
           <Switch>
             <Route exact path="/feeds" component={Feeds} />
+            <Route exact path="/feed/:feedId" component={Feed} />
             <Route exact path="/clubs" component={Clubs} />
             <Route exact path="/calendar" component={Calendar} />
             <Route exact path="/mess-menu" component={MessMenu} />

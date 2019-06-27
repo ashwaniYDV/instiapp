@@ -4,11 +4,13 @@ import { reducer as FormReducer } from 'redux-form';
 
 import AuthReducer from './authReducer';
 import UserReducer from './userReducer';
+import FeedReducer from './feedReducer';
 import ErrorReducer from './errorReducer';
 
 export default combineReducers({
   form: FormReducer,
   auth: AuthReducer,
   user: UserReducer,
+  feed: FeedReducer,
   error: ErrorReducer
 });
