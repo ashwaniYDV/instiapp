@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { Paper, Tabs, Tab } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-// import LostAndFoundAll from './LostAndFoundAll';
-// import LostAndFoundUser from './LostAndFoundUser';
+import LostAndFoundAll from './LostAndFoundAll';
+import LostAndFoundUser from './LostAndFoundUser';
 
 const styles = {
   root: {
@@ -40,10 +40,10 @@ class LostAndFound extends React.Component {
                 <Tab label="My" component={Link} to='/lost-n-found/user' />
                 </Tabs>
             </Paper>
-            {/* <Switch>
-                <Route path="/lost-n-found" component={LostAndFoundAll} />
-                <Route path="/lost-n-found/user" component={LostAndFoundUser} />
-          </Switch> */}
+            <Switch>
+                <Route exact path="/lost-n-found" component={LostAndFoundAll} />
+                <Route exact path="/lost-n-found/user" component={LostAndFoundUser} />
+          </Switch>
         </div>
     );
   }

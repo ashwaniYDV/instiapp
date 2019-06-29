@@ -5,6 +5,7 @@ import { reducer as FormReducer } from 'redux-form';
 import AuthReducer from './authReducer';
 import UserReducer from './userReducer';
 import FeedReducer from './feedReducer';
+import LostnfoundReducer from './lostnfoundReducer';
 import ErrorReducer from './errorReducer';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   auth: AuthReducer,
   user: UserReducer,
   feed: FeedReducer,
+  lostnfound: LostnfoundReducer,
   error: ErrorReducer
 });
