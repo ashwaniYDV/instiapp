@@ -22,3 +22,6 @@ export const ALL_FEEDS_SUCCESS = 'ALL_FEEDS_SUCCESS';
 export const ALL_FEEDS_FAIL = 'ALL_FEEDS_FAIL';
 export const FEED_SUCCESS = 'FEED_SUCCESS';
 export const FEED_FAIL = 'FEED_FAIL';
+export const CLUBS_GET_SUCCESS = 'CLUBS_GET_SUCCESS';
+export const CLUBS_GET_FAIL = 'CLUBS_GET_FAIL';
+export const CLUBS_LOADING = 'CLUBS_LOADING';
