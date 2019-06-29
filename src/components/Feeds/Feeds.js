@@ -28,6 +28,7 @@ class Feeds extends Component {
 
     render () {
         const { classes, feeds } = this.props;
+        console.log(feeds);
         const feedList = this.props.feed.feeds && !this.props.feed.feedsLoading ? (feeds.map((feed) => {
             let date=new Date(feed.eventDate).toDateString().toString();
 			return (
