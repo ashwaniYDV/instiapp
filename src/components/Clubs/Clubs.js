@@ -58,10 +58,10 @@ class Clubs extends Component {
           console.log(club.clubs[0].pages)
         clubLists = club.clubs.map(el => {
           return (
-            <Row key={el._id}>
+            <Col key={el._id} lg={{span: 8,offset:4}} md={{span: 8,offset:4}} sm={{span:20,offset:4}} xs={{span:20,offset:4}}>
               <Card
                 className={classes.card}
-                style={{ marginTop: 20, marginBottom: 30 }}
+                style={{ marginTop: 20, marginBottom: 30}}
               >
                 <CardHeader
                   avatar={
@@ -70,7 +70,7 @@ class Clubs extends Component {
                     </Avatar>
                   }
                   action={
-                    <IconButton aria-label="Settings">
+                    <IconButton aria-label="Settings" aria-controls="menu" aria-haspopup="true" variant="contained" color="primary" >
                       <MoreVertIcon />
                     </IconButton>
                   }
@@ -106,7 +106,7 @@ class Clubs extends Component {
                   </IconButton>
                 </CardActions>
               </Card>
-            </Row>
+            </Col>
           );
         });
         club.clubs.forEach(element => {
