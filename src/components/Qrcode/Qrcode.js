@@ -23,7 +23,7 @@ class Qrcode extends Component {
           isAuthenticated ? (
             <div className="container" style={{display: 'flex', justifyContent: 'center'}}>
                 {this.state.src!==null ? (
-                    <img src={this.state.src} />
+                    <img src={this.state.src} alt='QR Code' />
                 ): (
                     <div style={{background: 'red'}}>loading...</div>
                 )

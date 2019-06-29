@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Switch, Link, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -160,7 +160,7 @@ class Home extends React.Component {
                 <ListItemText primary='QR-Code' />
               </ListItem>,
               <ListItem button key='lostandfound' component={Link} to='/lost-n-found' onClick={this.handleDrawerClose} >
-                <Icon type="qrcode" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+                <Icon type="loading" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
                 <ListItemText primary='Lost-n-found' />
               </ListItem>,
               <ListItem button key='profile' component={Link} to='/profile' onClick={this.handleDrawerClose} >
@@ -169,9 +169,7 @@ class Home extends React.Component {
               </ListItem>
             ]
             :
-            [
-              
-            ]
+            []
           }
         </List>
         <Divider />
@@ -198,7 +196,7 @@ class Home extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
-              {title !='' ? title : 'Instiapp'}
+              {title !=='' ? title : 'Instiapp'}
             </Typography>
 
             {!isAuthenticated && (
@@ -278,7 +276,7 @@ class Home extends React.Component {
             <Route exact path="/map" component={Map} />
             <Route exact path="/qrcode" component={Qrcode} />
             <Route exact path="/useful-links" component={UsefulLinks} />
-            <Route exact path="/lost-n-found" component={LostAndFound} />
+            <Route path="/lost-n-found" component={LostAndFound} />
             <Route exact path="/profile" component={Profile} />
           </Switch>
         </main>

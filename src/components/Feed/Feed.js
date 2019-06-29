@@ -40,7 +40,7 @@ class Feeds extends Component {
                             >
                             </PageHeader>
                             <div style={{width: '100%'}}>
-                                <img src={feedData.eventImageUrl} width="100%" />
+                                <img src={feedData.eventImageUrl ? feedData.eventImageUrl : 'https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef'} width="100%" alt='Feed image' />
                             </div>
                             <PageHeader
                                 title={<span style={{color: '#fff'}}>{new Date(feedData.eventDate).toDateString().toString()}</span>}
@@ -52,7 +52,7 @@ class Feeds extends Component {
                             >
                                 <p style={{color: '#fff'}}>Venue: {feedData.eventVenue}</p>
                             </PageHeader>
-                            <p>Posted by: {feedData.feedPoster}</p>
+                            <p>Posted by: {feedData.feedPoster.name}</p>
                         </div>
                     </Col>
                     <Col md={24} lg={12}>
