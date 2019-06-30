@@ -1,52 +1,54 @@
-import {CLUBS_GET_SUCCESS,CLUBS_GET_FAIL,CLUBS_LOADING,CLUB_GET_FAIL,CLUB_GET_SUCCESS,CLUB_LOADING} from '../actions/types';
+import { CLUBS_LOADING, CLUB_LOADING, ALL_CLUBS_SUCCESS, ALL_CLUBS_FAIL, CLUB_SUCCESS, CLUB_FAIL } from "../actions/types";
 
-const initialState = {
-status: null,
-clubs:null,
-clubsLoading: false,
-clubsError: null,
-club:null
+const DEFAULT_STATE={
+    clubs: null,
+    club: null,
+    clubsLoading: false,
+    clubLoading: false,
+    status: null
 }
-export default function(state=initialState,{type,payload}){
-    switch (type) {
+
+export default (state=DEFAULT_STATE,action)=>{
+    switch(action.type) {
         case CLUBS_LOADING:
             return {
                 ...state,
-                clubsLoading:true
-            }
-        case CLUBS_GET_SUCCESS:
-            return {
-                ...state,
-                clubs: payload,
-                status: payload.status,
-                clubsLoading: false
-            }
-        case CLUBS_GET_FAIL:
-            return{
-                ...state,
-                clubsLoading: false,
-                clubsError: payload
-
+                clubsLoading: true
             }
         case CLUB_LOADING:
             return {
                 ...state,
-                clubsLoading:true
+                clubLoading: true
             }
-        case CLUB_GET_SUCCESS:
-            return{
-                ...state,
-                club:payload,
-                clubsLoading:false
+        case ALL_CLUBS_SUCCESS:
+            return {
+                ...state, 
+                clubs: action.payload.clubs,
+                status: action.payload.status,
+                clubsLoading: false
             }
-        case CLUB_GET_FAIL:
-            return{
-                ...state,
-                clubsLoading:false,
-                clubsError:payload
+        case ALL_CLUBS_FAIL:
+            return {
+                ...state, 
+                clubs: null,
+                status: action.payload.status,
+                clubsLoading: false
+            }
+        case CLUB_SUCCESS:
+            return {
+                ...state, 
+                club: action.payload.club,
+                status: action.payload.status,
+                clubLoading: false
+            }
+        case CLUB_FAIL:
+            return {
+                ...state, 
+                club: null,
+                status: action.payload.status,
+                clubLoading: false
             }
         default:
-            return null;
+            return state;
     }
-    
 }

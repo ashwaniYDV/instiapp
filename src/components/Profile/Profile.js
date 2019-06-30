@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import LoginRequired from '../LoginRequired/LoginRequired';
+
 import {updateUser} from '../../redux/actions/userActions';
 import {signOut} from '../../redux/actions/authActions';
 
@@ -69,11 +71,11 @@ class Profile extends Component {
   }
 
   render() {
-    const { newpassword, confnewpassword, alertMessage } = this.state;
-    const { email, name, instituteId } = this.props.user;
     
-    return (
-      this.props.isAuthenticated ? (
+    if(this.props.isAuthenticated) {
+      const { newpassword, confnewpassword, alertMessage } = this.state;
+      const { email, name, instituteId } = this.props.user;
+      return (
         <div className="container">
           <div className="row">
             <div className="col">
@@ -157,10 +159,12 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-      ): 
-      <h3 className="text-center text-danger">Please login again!</h3>
-
-    );
+      )
+    } else {
+      return (
+        <LoginRequired/>
+      )
+    }
   }
 }
 

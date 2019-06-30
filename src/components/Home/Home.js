@@ -18,6 +18,7 @@ import RegisterModal from '../RegisterModal/RegisterModal';
 import Feeds from '../Feeds/Feeds';
 import Feed from '../Feed/Feed';
 import Clubs from '../Clubs/Clubs';
+import Club from '../Club/Club';
 import MessMenu from '../MessMenu/MessMenu';
 import Calendar from '../Calendar/Calendar';
 import Map from '../Map/Map';
@@ -27,7 +28,6 @@ import LostAndFound from '../LostAndFound/LostAndFound';
 
 import { openLoginModal } from "../../redux/actions/authActions";
 import {signOut} from '../../redux/actions/authActions';
-import particularclubs from '../Club/pClubs';
 
 const drawerWidth = 240;
 
@@ -161,7 +161,7 @@ class Home extends React.Component {
                 <ListItemText primary='QR-Code' />
               </ListItem>,
               <ListItem button key='lostandfound' component={Link} to='/lost-n-found' onClick={this.handleDrawerClose} >
-                <Icon type="loading" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+                <Icon type="bank" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
                 <ListItemText primary='Lost-n-found' />
               </ListItem>,
               <ListItem button key='profile' component={Link} to='/profile' onClick={this.handleDrawerClose} >
@@ -272,14 +272,14 @@ class Home extends React.Component {
             <Route exact path="/feeds" component={Feeds} />
             <Route exact path="/feed/:feedId" component={Feed} />
             <Route exact path="/clubs" component={Clubs} />
+            <Route exact path="/club/:clubId" component={Club} />
             <Route exact path="/calendar" component={Calendar} />
             <Route exact path="/mess-menu" component={MessMenu} />
             <Route exact path="/map" component={Map} />
             <Route exact path="/qrcode" component={Qrcode} />
             <Route exact path="/useful-links" component={UsefulLinks} />
-            <Route path="/lost-n-found" component={LostAndFound} />
             <Route exact path="/profile" component={Profile} />
-            <Route path = "/clubs/:clubId" component ={particularclubs} />
+            <Route path="/lost-n-found" component={LostAndFound} />
           </Switch>
         </main>
       </div>

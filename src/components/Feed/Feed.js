@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 import { Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import { Row, Col, Skeleton, PageHeader, Button } from 'antd';
+import { Row, Col, Skeleton, PageHeader, Button, Alert } from 'antd';
 import 'antd/dist/antd.css';
 
 import {getFeed} from '../../redux/actions/feedActions';
@@ -18,7 +18,26 @@ const styles = theme => ({
   },
 });
 
-class Feeds extends Component {
+class Feed extends Component {
+
+    state = {
+        msg: null
+    }
+
+    componentDidUpdate(prevProps) {
+        const { error } = this.props;
+        if (error !== prevProps.error) {
+          if (error.id === "FEED_FAIL") {
+            this.setState({
+              msg: error.message
+            });
+          } else {
+            this.setState({
+              msg: null
+            });
+          }
+        }
+    }
 
     componentDidMount() {
         const feedId = this.props.match.params.feedId;
@@ -28,9 +47,11 @@ class Feeds extends Component {
     render () {
         const { classes } = this.props;
         const { feedData } = this.props;
+        const { msg } = this.state;
         const feed = feedData && !this.props.feed.feedLoading ? (
             <div>
                 <Row>
+                    {msg ? <Alert message={msg} type="error" /> : null}
                     <Col md={24} lg={12}>
                         <div className="column-1">
                         <PageHeader
@@ -77,17 +98,18 @@ class Feeds extends Component {
     }
 }
 
-Feeds.propTypes = {
+Feed.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
     feed: state.feed,
-    feedData: state.feed.feed
+    feedData: state.feed.feed,
+    error: state.error
 });
 
 export default compose(
     connect(mapStateToProps, { getFeed }),
     withStyles(styles, { withTheme: true })
-  )(Feeds);
+  )(Feed);

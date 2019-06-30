@@ -22,13 +22,32 @@ const styles = theme => ({
 
 class Feeds extends Component {
 
+    state = {
+        msg: null
+    }
+
+    componentDidUpdate(prevProps) {
+        const { error } = this.props;
+        if (error !== prevProps.error) {
+          if (error.id === "ALL_FEEDS_FAIL") {
+            this.setState({
+              msg: error.message
+            });
+          } else {
+            this.setState({
+              msg: null
+            });
+          }
+        }
+    }
+
     componentDidMount = () => {
         this.props.getAllFeeds();
     }
 
     render () {
         const { classes, feeds } = this.props;
-        console.log(feeds);
+        const { msg } = this.state;
         const feedList = this.props.feed.feeds && !this.props.feed.feedsLoading ? (feeds.map((feed) => {
             let date=new Date(feed.eventDate).toDateString().toString();
 			return (
@@ -54,6 +73,7 @@ class Feeds extends Component {
         
         return (
             <div style={{margin: '20px', maxWidth: '600px'}}>
+                {msg ? <Alert message={msg} type="error" /> : null}
                 {feedList.length ? feedList : <Alert message="No feeds found!" type='warning' />}
             </div>
         );
@@ -67,7 +87,8 @@ Feeds.propTypes = {
 
 const mapStateToProps = state => ({
     feed: state.feed,
-    feeds: state.feed.feeds
+    feeds: state.feed.feeds,
+    error: state.error
 });
 
 export default compose(
