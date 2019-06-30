@@ -37,7 +37,7 @@ class particularclubs extends Component {
       // const Feeds = dataClub.
       console.log(dataClub);
       return (
-        <div>
+        <div id="club">
           <Col lg={{span:10, offset:2}} xs={{span:20,offset:4}}>
               <div className="content">
                 <div className="header">
