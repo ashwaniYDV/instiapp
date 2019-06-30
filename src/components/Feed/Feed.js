@@ -18,7 +18,7 @@ const styles = theme => ({
   },
 });
 
-class Feeds extends Component {
+class Feed extends Component {
 
     state = {
         msg: null
@@ -98,7 +98,7 @@ class Feeds extends Component {
     }
 }
 
-Feeds.propTypes = {
+Feed.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
 };
@@ -112,4 +112,4 @@ const mapStateToProps = state => ({
 export default compose(
     connect(mapStateToProps, { getFeed }),
     withStyles(styles, { withTheme: true })
-  )(Feeds);
+  )(Feed);

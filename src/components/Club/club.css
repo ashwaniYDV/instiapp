@@ -1,0 +1,19 @@
+.column-1, .column-2{
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+}
+.column-2{
+    padding: 20px;
+}
+.column-1::-webkit-scrollbar, .column-2::-webkit-scrollbar{
+    width: 5px;
+}
+.column-1::-webkit-scrollbar-thumb, .column-2::-webkit-scrollbar-thumb{
+    background: #2196f3;
+}
+@media(max-width: 991px){
+    .column-1, .column-2{
+        height: auto;
+        overflow-y: visible;
+    }
+}

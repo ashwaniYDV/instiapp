@@ -18,6 +18,7 @@ import RegisterModal from '../RegisterModal/RegisterModal';
 import Feeds from '../Feeds/Feeds';
 import Feed from '../Feed/Feed';
 import Clubs from '../Clubs/Clubs';
+import Club from '../Club/Club';
 import MessMenu from '../MessMenu/MessMenu';
 import Calendar from '../Calendar/Calendar';
 import Map from '../Map/Map';
@@ -271,6 +272,7 @@ class Home extends React.Component {
             <Route exact path="/feeds" component={Feeds} />
             <Route exact path="/feed/:feedId" component={Feed} />
             <Route exact path="/clubs" component={Clubs} />
+            <Route exact path="/club/:clubId" component={Club} />
             <Route exact path="/calendar" component={Calendar} />
             <Route exact path="/mess-menu" component={MessMenu} />
             <Route exact path="/map" component={Map} />
