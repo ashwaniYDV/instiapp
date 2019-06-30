@@ -2,24 +2,20 @@ import React, { Component } from "react";
 import "antd/dist/antd.css";
 import "./Clubs.css";
 import { getClub } from "../../redux/actions/clubActions.js";
-import { Row, Col, Spin, Alert,Icon } from "antd";
+import {  Col, Spin, Icon } from "antd";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import { Paper, Typography,Button } from "@material-ui/core";
+import {  Typography,Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import ShareIcon from "@material-ui/icons/Share"
 import { compose } from "redux";
 import { connect } from "react-redux";
 
@@ -57,7 +53,7 @@ class Clubs extends Component {
       if (club.clubs !== undefined) {
         clubLists = club.clubs.map(el => {
           return (
-            <Col key={el._id} lg={{span: 8,offset:4}} md={{span: 8,offset:4}} sm={{span:20,offset:4}} xs={{span:20,offset:4}}>
+            <Col key={el._id} lg={{span: 8,offset:4}} md={{span: 20,offset:4}} sm={{span:20,offset:4}} xs={{span:20,offset:4}}>
               <Card
                 className={classes.card}
                 style={{ marginTop: 20, marginBottom: 30}}
@@ -69,7 +65,12 @@ class Clubs extends Component {
                     </Avatar>
                   }
                   action={
-                  <Link to={`clubs/${el._id}`} key={el._id}>
+                  <Link to={{
+                    pathname: `clubs/${el._id}`,
+                    state: {
+                      fromNoti:true
+                    }
+                  }}>
                     <Button
                     aria-controls="customized-menu"
                     aria-haspopup="true"
