@@ -1,0 +1,21 @@
+
+.anticon {
+    font-size: 20px;
+}
+.anticon-facebook{
+    color:blue;
+}
+.anticon-instagram{
+    color: pink;
+}
+.anticon-linkedin{
+    color: green;
+}
+.anticon-twitter{
+    color: blue;
+}
+@media (max-width: 600px) {
+  .ant-row {
+    padding-left: 10%;
+  }
+}
