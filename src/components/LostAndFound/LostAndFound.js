@@ -1,4 +1,6 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { Route, Link, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import LostAndFoundAll from './LostAndFoundAll';
 import LostAndFoundUser from './LostAndFoundUser';
+import LoginRequired from '../LoginRequired/LoginRequired';
 
 const styles = {
   root: {
@@ -19,6 +22,19 @@ class LostAndFound extends React.Component {
     value: 0,
   };
 
+  componentDidMount() {
+    let title = this.props.history.location.pathname;
+    if(title==='/lost-n-found') {
+      this.setState({
+        value: 0
+      })
+    } else if(title==='/lost-n-found/user') {
+      this.setState({
+        value: 1
+      })
+    }
+  }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -26,7 +42,8 @@ class LostAndFound extends React.Component {
   render() {
     const { classes } = this.props;
 
-    return (
+    if(this.props.isAuthenticated) {
+      return (
         <div>
             <Paper className={classes.root}>
                 <Tabs
@@ -45,7 +62,12 @@ class LostAndFound extends React.Component {
                 <Route exact path="/lost-n-found/user" component={LostAndFoundUser} />
           </Switch>
         </div>
-    );
+      );
+    } else {
+      return (
+        <LoginRequired/>
+      )
+    } 
   }
 }
 
@@ -53,4 +75,14 @@ LostAndFound.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LostAndFound);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  lostnfound: state.lostnfound,
+  lostnfounds: state.lostnfound.lostnfounds,
+  error: state.error
+});
+
+export default compose(
+  connect(mapStateToProps, {}),
+  withStyles(styles)
+)(LostAndFound);

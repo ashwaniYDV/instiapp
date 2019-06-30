@@ -160,7 +160,7 @@ class Home extends React.Component {
                 <ListItemText primary='QR-Code' />
               </ListItem>,
               <ListItem button key='lostandfound' component={Link} to='/lost-n-found' onClick={this.handleDrawerClose} >
-                <Icon type="loading" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+                <Icon type="bank" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
                 <ListItemText primary='Lost-n-found' />
               </ListItem>,
               <ListItem button key='profile' component={Link} to='/profile' onClick={this.handleDrawerClose} >
