@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import { Card, CardHeader, CardMedia, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
+import { Avatar, Card, CardHeader, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Fab, Icon } from '@material-ui/core';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { Spin, Alert, Tag, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 
-import {getAllLostnfounds} from '../../redux/actions/lostnfoundActions';
+import {getAllLostnfounds, deleteLostnfound} from '../../redux/actions/lostnfoundActions';
 
 const styles = theme => ({
   card: {
@@ -72,7 +72,10 @@ class LostAndFoundAll extends Component {
       }
     }
     
-    
+    handleDelete = async (id) => {
+      await this.props.deleteLostnfound(id);
+      this.props.getAllLostnfounds();
+    }
 
     render () {
       const { classes, lostnfounds } = this.props;
@@ -112,6 +115,15 @@ class LostAndFoundAll extends Component {
               {lostnfound.time}
               <Typography variant="h6" gutterTop>Address:</Typography>
               {lostnfound.address}
+              { this.props.user.isSuperUser ? (
+                  <div style={{marginTop: '10px', marginBottom: '10px'}}>
+                    <Fab color="secondary" variant="extended" size="small" className={classes.fab} onClick={()=>{this.handleDelete(lostnfound._id)}} >
+                        <DeleteIcon className={classes.extendedIcon} />
+                        Delete
+                    </Fab>
+                  </div>
+                ) : null
+              }
             </CardContent>
             <ExpansionPanel>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -162,12 +174,13 @@ LostAndFoundAll.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    lostnfound: state.lostnfound,
-    lostnfounds: state.lostnfound.lostnfounds,
-    error: state.error
+  user: state.auth.user,
+  lostnfound: state.lostnfound,
+  lostnfounds: state.lostnfound.lostnfounds,
+  error: state.error
 });
 
 export default compose(
-    connect(mapStateToProps, { getAllLostnfounds }),
+    connect(mapStateToProps, { getAllLostnfounds, deleteLostnfound }),
     withStyles(styles, { withTheme: true })
   )(LostAndFoundAll);
