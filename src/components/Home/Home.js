@@ -279,7 +279,7 @@ class Home extends React.Component {
             <Route exact path="/useful-links" component={UsefulLinks} />
             <Route path="/lost-n-found" component={LostAndFound} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path = "/clubs/:clubId" component ={particularclubs} />
+            <Route path = "/clubs/:clubId" component ={particularclubs} />
           </Switch>
         </main>
       </div>
