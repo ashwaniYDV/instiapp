@@ -1,0 +1,19 @@
+.content{
+    padding: 40px 0 0 0;
+}
+.header{
+    padding: 10px;
+}
+.information > h1,h2,h3,h4,h6,p{
+    padding: 4px;
+    text-transform: capitalize;
+}
+h6{
+    letter-spacing: 2px;
+    color: #00f;
+    font-size: 10px;
+}
+.List{
+    list-style: none;
+    padding: 10px 0 0 10px;
+}

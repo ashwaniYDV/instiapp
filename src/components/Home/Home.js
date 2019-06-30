@@ -27,6 +27,7 @@ import LostAndFound from '../LostAndFound/LostAndFound';
 
 import { openLoginModal } from "../../redux/actions/authActions";
 import {signOut} from '../../redux/actions/authActions';
+import particularclubs from '../Club/pClubs';
 
 const drawerWidth = 240;
 
@@ -278,6 +279,7 @@ class Home extends React.Component {
             <Route exact path="/useful-links" component={UsefulLinks} />
             <Route path="/lost-n-found" component={LostAndFound} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path = "/clubs/:clubId" component ={particularclubs} />
           </Switch>
         </main>
       </div>

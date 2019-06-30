@@ -15,7 +15,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import { Paper, Typography } from "@material-ui/core";
+import { Paper, Typography,Button } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
@@ -55,7 +55,6 @@ class Clubs extends Component {
     let clubLists;
     if (club) {
       if (club.clubs !== undefined) {
-          console.log(club.clubs[0].pages)
         clubLists = club.clubs.map(el => {
           return (
             <Col key={el._id} lg={{span: 8,offset:4}} md={{span: 8,offset:4}} sm={{span:20,offset:4}} xs={{span:20,offset:4}}>
@@ -70,9 +69,17 @@ class Clubs extends Component {
                     </Avatar>
                   }
                   action={
-                    <IconButton aria-label="Settings" aria-controls="menu" aria-haspopup="true" variant="contained" color="primary" >
-                      <MoreVertIcon />
-                    </IconButton>
+                  <Link to={`clubs/${el._id}`} key={el._id}>
+                    <Button
+                    aria-controls="customized-menu"
+                    aria-haspopup="true"
+                    variant="contained"
+                    color="primary"
+                  >
+
+                    Know More
+                  </Button>
+                  </Link>
                   }
                   title={el.name}
                   subheader={el.bio}
