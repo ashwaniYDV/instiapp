@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import 'antd/dist/antd.css';
 import {  Avatar, Icon } from "antd";
+import './home.css';
 
 import Profile from '../Profile/Profile';
 import LoginModal from '../LoginModal/LoginModal';
@@ -198,7 +199,7 @@ class Home extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
-              {title !=='' ? title : 'Instiapp/Feeds'}
+              {title !=='' ? title : 'IITP WebApp / Feeds'}
             </Typography>
 
             {!isAuthenticated && (
