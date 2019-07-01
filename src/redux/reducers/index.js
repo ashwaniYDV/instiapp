@@ -7,6 +7,7 @@ import UserReducer from './userReducer';
 import FeedReducer from './feedReducer';
 import ClubReducer from './clubReducer';
 import LostnfoundReducer from './lostnfoundReducer';
+import MessReducer from './messReducer';
 import ErrorReducer from './errorReducer';
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   feed: FeedReducer,
   club: ClubReducer,
   lostnfound: LostnfoundReducer,
+  mess: MessReducer,
   error: ErrorReducer
 });
