@@ -11,7 +11,7 @@ class Settings extends React.Component {
     render() {
         if(this.props.isAuthenticated){
             return (
-                <div>
+                <div style={{padding: '20px'}}>
                     <SelectMess/>
                     <UpdateMess/>
                 </div>    

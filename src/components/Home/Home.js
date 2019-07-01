@@ -198,7 +198,7 @@ class Home extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
-              {title !=='' ? title : 'Instiapp'}
+              {title !=='' ? title : 'Instiapp/Feeds'}
             </Typography>
 
             {!isAuthenticated && (
