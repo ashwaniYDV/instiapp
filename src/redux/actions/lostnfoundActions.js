@@ -85,3 +85,28 @@ export const deleteLostnfound = (id) => {
         }
     }
 }
+
+export const postLostnfounds = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            const res = await Axios.post(`${serverUrl}/lostnfounds`, data, tokenConfig(getState));
+            console.log(res.data);
+
+            // dispatch({
+            // type: ALL_LOSTANDFOUNDS_SUCCESS,
+            // payload: { lostnfounds: res.data.lostnfounds, status: res.status}
+            // });
+        } catch (err) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+
+            // dispatch(
+            //     returnErrors(err.response.data.message, err.response.status, "ALL_LOSTANDFOUNDS__FAIL")
+            // );
+            // dispatch({
+            //     type: ALL_LOSTANDFOUNDS__FAIL,
+            //     payload: { status: err.response.status }
+            // });
+        }
+    }
+}

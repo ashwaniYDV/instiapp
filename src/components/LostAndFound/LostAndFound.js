@@ -1,10 +1,10 @@
 import React from 'react';
+import { Route, Link, Switch } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Route, Link, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Paper, Tabs, Tab } from '@material-ui/core';
+import { Paper, Tabs, Tab, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import LostAndFoundAll from './LostAndFoundAll';
@@ -57,6 +57,11 @@ class LostAndFound extends React.Component {
                 <Tab label="My" component={Link} to='/lost-n-found/user' />
                 </Tabs>
             </Paper>
+            <div style={{display: 'flex', justifyContent: 'center', margin: '20px'}}>
+              <Button variant="contained" color="secondary" className={classes.button} component={Link} to='/lost-n-found/post' >
+                Post a Lost-n-found
+              </Button>
+            </div>
             <Switch>
                 <Route exact path="/lost-n-found" component={LostAndFoundAll} />
                 <Route exact path="/lost-n-found/user" component={LostAndFoundUser} />
