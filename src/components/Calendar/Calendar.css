@@ -73,6 +73,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .calendar .row-middle {
