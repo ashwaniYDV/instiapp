@@ -109,7 +109,7 @@ class Calendar extends React.Component {
 
   render() {
     return (
-      <div className="calendar">
+      <div className="calendar" style={{overflowX:"hidden"}}>
         {this.renderHeader()}
         {this.renderDays()}
         {this.renderCells()}
