@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Avatar, Card, CardHeader, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Fab, Icon } from '@material-ui/core';
+import { Avatar, Card, CardHeader, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Fab } from '@material-ui/core';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
@@ -78,10 +79,6 @@ class LostAndFoundUser extends Component {
         this.props.getUserLostnfounds();
     }
 
-    handleEdit = (id) => {
-        console.log(id)
-    }
-
     render () {
       const { classes, userlostnfounds } = this.props;
       const { msg } = this.state;
@@ -110,18 +107,18 @@ class LostAndFoundUser extends Component {
               title="Paella dish"
             /> */}
             <CardContent>
-              <Typography variant="h6" gutterTop>Name:</Typography>
+              <Typography variant="h6">Name:</Typography>
               {lostnfound.name}
-              <Typography variant="h6" gutterTop>Date:</Typography>
+              <Typography variant="h6">Date:</Typography>
               {lostnfound.date}
-              <Typography variant="h6" gutterTop>Place:</Typography>
+              <Typography variant="h6">Place:</Typography>
               {lostnfound.place}
-              <Typography variant="h6" gutterTop>Time:</Typography>
+              <Typography variant="h6">Time:</Typography>
               {lostnfound.time}
-              <Typography variant="h6" gutterTop>Address:</Typography>
+              <Typography variant="h6">Address:</Typography>
               {lostnfound.address}
               <div style={{marginTop: '10px', marginBottom: '10px'}}>
-                <Fab color="primary" variant="extended" size="small" className={classes.fab} onClick={()=>{this.handleEdit(lostnfound._id)}} >
+                <Fab color="primary" variant="extended" size="small" className={classes.fab} component={Link} to={{pathname: '/lost-n-found/edit', state: {lostnfound: lostnfound}}} >
                     <EditIcon className={classes.extendedIcon} />
                     Edit
                 </Fab>

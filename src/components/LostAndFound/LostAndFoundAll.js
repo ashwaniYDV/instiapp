@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Avatar, Card, CardHeader, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Fab, Icon } from '@material-ui/core';
+import { Avatar, Card, CardHeader, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Fab } from '@material-ui/core';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -105,15 +105,15 @@ class LostAndFoundAll extends Component {
               title="Paella dish"
             /> */}
             <CardContent>
-              <Typography variant="h6" gutterTop>Name:</Typography>
+              <Typography variant="h6">Name:</Typography>
               {lostnfound.name}
-              <Typography variant="h6" gutterTop>Date:</Typography>
+              <Typography variant="h6">Date:</Typography>
               {lostnfound.date}
-              <Typography variant="h6" gutterTop>Place:</Typography>
+              <Typography variant="h6">Place:</Typography>
               {lostnfound.place}
-              <Typography variant="h6" gutterTop>Time:</Typography>
+              <Typography variant="h6">Time:</Typography>
               {lostnfound.time}
-              <Typography variant="h6" gutterTop>Address:</Typography>
+              <Typography variant="h6">Address:</Typography>
               {lostnfound.address}
               { this.props.user.isSuperUser ? (
                   <div style={{marginTop: '10px', marginBottom: '10px'}}>

@@ -101,10 +101,9 @@ class Clubs extends Component {
                                     component="p"
                                 >
                                     {club.description.substr(0,200)}...
-                                <span style={{lineHeight:3,display:"block"}}><Link to="#">Visit Our Site</Link></span>
                                 </Typography>
                             </CardContent>
-                            <CardActions className={classes.actions} disableActionSpacing>
+                            <CardActions className={classes.actions}>
                                 <Icon  style={{padding:10, fontSize: '20px', color: 'blue'}} type="facebook" />
                                 <Icon  style={{padding:10, fontSize: '20px', color: 'green'}} type="linkedin" />
                                 <Icon  style={{padding:10, fontSize: '20px', color: 'pink'}} type="instagram" />

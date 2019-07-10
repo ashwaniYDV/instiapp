@@ -40,7 +40,7 @@ class CancelMeal extends React.Component {
             };
             let studentMongoId=this.props.user._id;
             let date=values.date.split('-');
-            let currentMeal=date[2]+'_'+date[1]+'_'+date[0]+'_'+values.meal+'_'+'-1';
+            let currentMeal=date[2]+'_'+date[1]+'_'+date[0]+'_'+values.meal+'_-1';
             console.log(currentMeal);
             let data={
                 currentMeal: currentMeal
