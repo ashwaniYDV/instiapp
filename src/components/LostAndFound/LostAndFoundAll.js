@@ -88,7 +88,7 @@ class LostAndFoundAll extends Component {
               style={{background: '#eee'}}
               avatar={
                 <Avatar aria-label="Recipe" className={classes.avatar}>
-                  R
+                  {lostnfound.name[0].toUpperCase()}
                 </Avatar>
               }
               action={
@@ -97,7 +97,7 @@ class LostAndFoundAll extends Component {
                 </IconButton>
               }
               title={lostnfound.name}
-              subheader="September 14, 2016"
+              subheader={lostnfound.date}
             />
             {/* <CardMedia
               className={classes.media}

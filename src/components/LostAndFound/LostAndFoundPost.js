@@ -42,10 +42,15 @@ class LostAndFoundPost extends React.Component {
             };
             values.lostnfoundPoster=this.props.user._id;
             console.log(values);
-            this.props.postLostnfounds(values);
+            this.post(values);
         }
         });
     };
+
+    post = async (values) => {
+        await this.props.postLostnfounds(values);
+        this.props.history.push('/lost-n-found');
+    }
 
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -53,7 +58,7 @@ class LostAndFoundPost extends React.Component {
 
         return (
             <div>
-                <div style={{margin: 'auto', maxWidth: '500px'}}>
+                <div style={{margin: 'auto', maxWidth: '550px', padding: '20px 50px'}}>
                     <h3 className="text-center">Post Lost-n-found</h3>
                     {msg ? <Alert message={msg} type="error" /> : null}
                     <Form onSubmit={this.handleSubmit}>
