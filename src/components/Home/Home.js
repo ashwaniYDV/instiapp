@@ -27,6 +27,7 @@ import UsefulLinks from '../UsefulLinks/UsefulLinks';
 import Qrcode from '../Qrcode/Qrcode';
 import LostAndFound from '../LostAndFound/LostAndFound';
 import LostAndFoundPost from '../LostAndFound/LostAndFoundPost';
+import LostAndFoundEdit from '../LostAndFound/LostAndFoundEdit';
 import Settings from '../Settings/Settings';
 
 import { openLoginModal } from "../../redux/actions/authActions";
@@ -284,6 +285,7 @@ class Home extends React.Component {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/lost-n-found/post" component={LostAndFoundPost} />
+            <Route exact path="/lost-n-found/edit" component={LostAndFoundEdit} />
             <Route path="/lost-n-found" component={LostAndFound} />
           </Switch>
         </main>
@@ -294,8 +296,6 @@ class Home extends React.Component {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
-  // Injected by the documentation to work in an iframe.
-  // You won't need it on your project.
   container: PropTypes.object,
   theme: PropTypes.object.isRequired,
 };

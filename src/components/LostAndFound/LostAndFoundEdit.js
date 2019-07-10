@@ -3,15 +3,16 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { Form, Select, Button, Alert, DatePicker, TimePicker, Input } from 'antd';
+import moment from 'moment';
 import 'antd/dist/antd.css';
 
 import LoginRequired from '../LoginRequired/LoginRequired';
-import {postLostnfounds} from '../../redux/actions/lostnfoundActions';
+import {editLostnfounds} from '../../redux/actions/lostnfoundActions';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-class LostAndFoundPost extends React.Component {
+class LostAndFoundEdit extends React.Component {
 
     state = {
         msg: null
@@ -20,7 +21,7 @@ class LostAndFoundPost extends React.Component {
     componentDidUpdate(prevProps) {
         const { error } = this.props;
         if (error !== prevProps.error) {
-          if (error.id === "POST_LOSTANDFOUND__FAIL") {
+          if (error.id === "EDIT_LOSTANDFOUND__FAIL") {
             this.setState({
               msg: error.message
             });
@@ -43,25 +44,29 @@ class LostAndFoundPost extends React.Component {
             };
             values.lostnfoundPoster=this.props.user._id;
             console.log(values);
-            this.post(values);
+            this.editPost(values);
         }
         });
     };
 
-    post = async (values) => {
-        await this.props.postLostnfounds(values);
-        this.props.history.push('/lost-n-found');
+    editPost = async (data) => {
+        let lostnfoundId = this.props.location.state.lostnfound._id;
+        console.log(lostnfoundId, data);
+        await this.props.editLostnfounds({data, lostnfoundId});
+        this.props.history.push('/lost-n-found/user');
     }
 
     render() {
         const { getFieldDecorator } = this.props.form;
         const { msg } = this.state;
 
+        const {lostnfound} = this.props.location.state;
+
         if(this.props.isAuthenticated) {
             return (
                 <div>
                     <div style={{margin: 'auto', maxWidth: '550px', padding: '20px 50px'}}>
-                        <h3 className="text-center">Post Lost-n-found</h3>
+                        <h3 className="text-center">Edit Lost-n-found</h3>
                         {msg ? <Alert message={msg} type="error" /> : null}
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Item label="Lost-n-found Status">
@@ -73,12 +78,14 @@ class LostAndFoundPost extends React.Component {
                                 >
                                     <Option value='1'>You have lost this item</Option>
                                     <Option value='2'>You have found this item</Option>
+                                    <Option value='3'>Item has been recovered</Option>
                                 </Select>,
                                 )}
                             </Form.Item>
                             <Form.Item label="Name of item">
                             {getFieldDecorator('name', {
                                 rules: [{ required: true, message: 'Please enter item name!' }],
+                                initialValue: lostnfound.name
                             })(
                                 <Input
                                 type="text"
@@ -89,6 +96,7 @@ class LostAndFoundPost extends React.Component {
                             <Form.Item label="Place">
                             {getFieldDecorator('place', {
                                 rules: [{ required: true, message: 'Please enter place!' }],
+                                initialValue: lostnfound.place
                             })(
                                 <Input
                                 type="text"
@@ -99,6 +107,7 @@ class LostAndFoundPost extends React.Component {
                             <Form.Item label="Description">
                             {getFieldDecorator('description', {
                                 rules: [{ required: true, message: 'Please enter description!' }],
+                                initialValue: lostnfound.description
                             })(
                                 <TextArea
                                 type="text"
@@ -109,6 +118,7 @@ class LostAndFoundPost extends React.Component {
                             <Form.Item label="Contact">
                             {getFieldDecorator('contact', {
                                 rules: [{ required: true, message: 'Please enter your contact number!' }],
+                                initialValue: lostnfound.contact
                             })(
                                 <Input
                                 type="number"
@@ -119,6 +129,7 @@ class LostAndFoundPost extends React.Component {
                             <Form.Item label="Address">
                             {getFieldDecorator('address', {
                                 rules: [{ required: true, message: 'Please enter address!' }],
+                                initialValue: lostnfound.address
                             })(
                                 <Input
                                 type="text"
@@ -129,6 +140,7 @@ class LostAndFoundPost extends React.Component {
                             <Form.Item label="Date">
                             {getFieldDecorator('date', {
                                 rules: [{ required: true, message: 'Please select date!' }],
+                                initialValue: moment(lostnfound.date, 'DD-MM-YYYY')
                             })(
                                 <DatePicker/>
                             )}
@@ -136,12 +148,13 @@ class LostAndFoundPost extends React.Component {
                             <Form.Item label="Time">
                             {getFieldDecorator('time', {
                                 rules: [{ required: true, message: 'Please select time!' }],
+                                initialValue: moment(lostnfound.time, 'HH:mm:ss')
                             })(
                                 <TimePicker/>
                             )}
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit">Post</Button>
+                                <Button type="primary" htmlType="submit">Edit Post</Button>
                             </Form.Item>
                         </Form>
                     </div>
@@ -162,6 +175,6 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-    connect(mapStateToProps, {postLostnfounds}),
-    Form.create({ name: 'coordinated' })
-  )(LostAndFoundPost);
+    connect(mapStateToProps, {editLostnfounds}),
+    Form.create({ name: 'edit' })
+  )(LostAndFoundEdit);

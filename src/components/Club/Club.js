@@ -66,10 +66,9 @@ class Club extends Component {
                             >
                             </PageHeader>
                             <div style={{width: '100%'}}>
-                                <img src='https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef' width="100%" alt='Club image' />
+                                <img src='https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef' width="100%" alt='Club' />
                             </div>
-                            <p>Posted by: {clubData.name}</p>
-                            <div className="content">
+                            <div className="content" style={{padding: '20px'}}>
                                 <div className="header">
                                 <Typography variant="h2" component="h2" gutterBottom>
                                     {clubData.name}
@@ -102,7 +101,7 @@ class Club extends Component {
                     </Col>
                     <Col md={24} lg={12}>
                         <div className="column-2">
-                            <h3>Feeds of {clubData.name}</h3>
+                            <h3 style={{textAlign: 'center'}}>Feeds of {clubData.name}</h3>
                             {clubData.events.map((feed) => {
                                 console.log(feed);
                                 let date=new Date(feed.eventDate).toDateString().toString();

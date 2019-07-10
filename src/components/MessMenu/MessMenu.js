@@ -169,11 +169,11 @@ const hostel3 = [{
 },
 
 ]
-    let data
-    if(this.state.hostel == 1){
+    let data;
+    if(this.state.hostel === 1){
         data = hostel1.map(({day,Breakfast,Lunch,Snacks,Dinner})=> {
             return (
-                <Col sm={24} lg={8} style={{padding:'20px',font:100}}>
+                <Col sm={24} lg={8} style={{padding:'20px',font:100}} key={day}>
                     <Title  style={{fontWeight:100}} level={1}>{day}</Title>
                     <Title  style={{fontWeight:100}} level={4}>Breakfast</Title>
                     {
@@ -213,7 +213,7 @@ const hostel3 = [{
             
         })
     }
-    else if(this.state.hostel == 2){
+    else if(this.state.hostel === 2){
         data = hostel2.map(({day,Breakfast,Lunch,Snacks,Dinner})=> {
             return (
                 <Col sm={24} lg={8} style={{padding:'20px',font:100}}>
