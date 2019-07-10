@@ -74,7 +74,6 @@
   flex-wrap: wrap;
   width: 100%;
 }
-
 .calendar .row-middle {
   align-items: center;
 }
@@ -94,7 +93,11 @@
   justify-content: center;
   text-align: center;
 }
-
+@media(max-width:540px){
+    .days > .col   {
+        font-size: 5px;
+    }
+}
 .calendar .col-end {
   justify-content: flex-end;
   text-align: right;

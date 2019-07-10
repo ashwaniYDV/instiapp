@@ -300,11 +300,11 @@ const hostel3 = [{
         })
     }
     return (
-      <div>
-        <div id="mess">
+      <div style={{overflowX:"hidden"}}>
+        <div id="mess" style={{overflowX:"hidden"}}>
           <Select
             defaultValue="1"
-            style={{ width: 620, fontSize: 30, margin: 20 }}
+            style={{ width: 220, fontSize: 30, margin: 20 }}
             onChange={this.handleChange}
           >
             <Option value="1">hostel1</Option>
