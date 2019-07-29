@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import LostAndFoundAll from './LostAndFoundAll';
 import LostAndFoundUser from './LostAndFoundUser';
 import LoginRequired from '../LoginRequired/LoginRequired';
+import ActiveRequired from '../ActiveRequired/ActiveRequired';
 
 const styles = {
   root: {
@@ -42,7 +43,7 @@ class LostAndFound extends React.Component {
   render() {
     const { classes } = this.props;
 
-    if(this.props.isAuthenticated) {
+    if(this.props.isAuthenticated && this.props.user.active === 1) {
       return (
         <div>
             <Paper className={classes.root}>
@@ -68,6 +69,10 @@ class LostAndFound extends React.Component {
           </Switch>
         </div>
       );
+    } else if (this.props.isAuthenticated && this.props.user.active === 0) {
+      return (
+        <ActiveRequired/>
+      )
     } else {
       return (
         <LoginRequired/>
@@ -82,6 +87,7 @@ LostAndFound.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
   lostnfound: state.lostnfound,
   lostnfounds: state.lostnfound.lostnfounds,
   error: state.error
