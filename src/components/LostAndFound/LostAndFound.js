@@ -70,9 +70,7 @@ class LostAndFound extends React.Component {
         </div>
       );
     } else if (this.props.isAuthenticated && this.props.user.active === 0) {
-      return (
-        <ActiveRequired/>
-      )
+      return null;
     } else {
       return (
         <LoginRequired/>

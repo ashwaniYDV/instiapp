@@ -58,12 +58,13 @@ class RegisterModal extends Component {
     this.toggleModal();
   };
 
-  handleCreate = ({ name, email, password, instituteId }) => {
+  handleCreate = ({ name, email, password, instituteId, phone }) => {
     const newUser = {
       name,
       email,
       password,
-      instituteId
+      instituteId,
+      phone
     };
     this.props.signUp(newUser);
   };
@@ -134,6 +135,28 @@ class RegisterModal extends Component {
               )}
             </Form.Item>
             <Form.Item>
+              {getFieldDecorator('instituteId', {
+                rules: [{ required: true, message: 'Please enter your instituteId!' }],
+              })(
+                <Input
+                  type="text"
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder="Institute Id"
+                />,
+              )}
+            </Form.Item>
+            <Form.Item>
+              {getFieldDecorator('phone', {
+                rules: [{ required: true, message: 'Please enter phone number!' }],
+              })(
+                <Input
+                  type="text"
+                  prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder="Phone"
+                />,
+              )}
+            </Form.Item>
+            <Form.Item>
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: 'Please input your password!' }],
               })(
@@ -141,17 +164,6 @@ class RegisterModal extends Component {
                   type="password"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Password"
-                />,
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('instituteId', {
-                rules: [{ required: true, message: 'Please input your instituteId!' }],
-              })(
-                <Input
-                  type="text"
-                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Institute Id"
                 />,
               )}
             </Form.Item>

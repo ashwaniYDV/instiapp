@@ -10,7 +10,10 @@ import {
     OPEN_LOGIN_MODAL,
     CLOSE_LOGIN_MODAL,
     OPEN_REGISTER_MODAL,
-    CLOSE_REGISTER_MODAL
+    CLOSE_REGISTER_MODAL,
+    ACTIVATION_LOADING,
+    ACTIVATION_SUCCESS,
+    ACTIVATION_FAIL,
   } from "./types";
   
 import Axios from "axios";
@@ -62,6 +65,37 @@ export const signIn = (data) => {
             // });
         }
     }
+}
+
+export const activateUser = (data) => {
+  return async (dispatch, getState) => {
+      try {
+        console.log(data);
+          dispatch({
+              type: ACTIVATION_LOADING
+          });
+          const res = await Axios.post(`${serverUrl}/users/activate`, data, tokenConfig(getState));
+          dispatch({
+              type: ACTIVATION_SUCCESS,
+              payload: {token: res.data.token, user: res.data.user, status: res.status}
+          });
+          dispatch({
+            type: USER_LOADED,
+            payload: { user: res.data.user, status: res.status}
+          });
+
+          localStorage.setItem('USER', JSON.stringify(res.data.user));
+
+      } catch (err) {
+        console.log(err.response.data.message);
+        dispatch(
+          returnErrors(err.response.data.message, err.response.status, "ACTIVATION_FAIL")
+        );
+        dispatch({
+          type: ACTIVATION_FAIL
+        });
+      }
+  }
 }
 
 export const signOut = () => {

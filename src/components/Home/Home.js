@@ -29,6 +29,7 @@ import LostAndFound from '../LostAndFound/LostAndFound';
 import LostAndFoundPost from '../LostAndFound/LostAndFoundPost';
 import LostAndFoundEdit from '../LostAndFound/LostAndFoundEdit';
 import Settings from '../Settings/Settings';
+import ActiveRequired from '../ActiveRequired/ActiveRequired';
 
 import { openLoginModal } from "../../redux/actions/authActions";
 import {signOut} from '../../redux/actions/authActions';
@@ -271,6 +272,7 @@ class Home extends React.Component {
         </nav>
         <main className={classes.content} >
           <div className={classes.toolbar} />
+          {this.props.user && this.props.user.active ===0 ? <ActiveRequired /> : null}
           <Route exact path="/" component={Feeds} />
           <Switch>
             <Route exact path="/feeds" component={Feeds} />
@@ -302,7 +304,8 @@ Home.propTypes = {
 
 function mapStateToProps (state) {
   return {
-    auth: state.auth
+    auth: state.auth,
+    user: state.auth.user
   }
 }
 

@@ -11,6 +11,7 @@ class Profile extends Component {
     email: '',
     instituteId: '',
     name: '',
+    phone: '',
     newpassword: '',
     confnewpassword: '',
     alertMessage: ''
@@ -84,6 +85,7 @@ class Profile extends Component {
               <p>InstituteId: {this.props.user.instituteId}</p>
               <p>Batch: {this.props.user.batch}</p>
               <p>Branch: {this.props.user.branch}</p>
+              <p>Phone: {this.props.user.phone}</p>
             </div>
             <button className="btn btn-danger" onClick={this.signOut}>SignOut</button>
           </div>

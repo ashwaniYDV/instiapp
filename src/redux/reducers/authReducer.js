@@ -10,7 +10,10 @@ import {
     OPEN_LOGIN_MODAL,
     CLOSE_LOGIN_MODAL,
     OPEN_REGISTER_MODAL,
-    CLOSE_REGISTER_MODAL
+    CLOSE_REGISTER_MODAL,
+    ACTIVATION_LOADING,
+    ACTIVATION_SUCCESS,
+    ACTIVATION_FAIL,
   } from "../actions/types";
 
 const DEFAULT_STATE={
@@ -49,6 +52,22 @@ export default (state=DEFAULT_STATE,action)=>{
                 user: action.payload.user, 
                 openloginModal: false,
                 openregisterModal: false
+            }
+        case ACTIVATION_LOADING:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case ACTIVATION_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                user: action.payload.user
+            }
+        case ACTIVATION_FAIL:
+            return {
+                ...state,
+                isLoading: false
             }
         case LOGIN_FAIL:
         case REGISTER_FAIL:
