@@ -8,6 +8,14 @@ class Calendar extends React.Component {
     selectedDate: new Date()
   };
 
+  componentDidMount() {
+    console.log(this.state.currentMonth);
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.selectedDate);
+  }
+
   renderHeader() {
     const dateFormat = "MMMM YYYY";
 
