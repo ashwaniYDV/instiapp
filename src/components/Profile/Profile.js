@@ -6,71 +6,41 @@ import ActiveRequired from '../ActiveRequired/ActiveRequired';
 
 import './Profile.css';
 
-import {updateUser} from '../../redux/actions/userActions';
-import {signOut} from '../../redux/actions/authActions';
-
 class Profile extends Component {
-  state={
-    email: '',
-    instituteId: '',
-    name: '',
-    phone: '',
-    newpassword: '',
-    confnewpassword: '',
-    alertMessage: ''
-  }
-
-  signOut= async ()=> {
-    await this.props.signOut();
-    if(!this.props.isAuthenticated) {
-      this.props.history.push('/');
-    }
-  }
-
-  onChange=(e)=>{
-    this.setState({[e.target.name]: e.target.value})
-  }
 
   render() {
     
     if(this.props.isAuthenticated) {
-      const { newpassword, confnewpassword, alertMessage } = this.state;
-      const { email, name, instituteId } = this.props.user;
       return (
-        <div className="wrapper">
+        <div className="wrapper" style={{background: "red"}}>
           <div className="main-profile">
             <aside className="profile-card">
               <header>
                 <a target="_blank" href="#">
-                  <img src="http://lorempixel.com/150/150/people/" className="hoverZoomLink" />
+                  <img src="https://scontent-bom1-1.xx.fbcdn.net/v/t1.0-9/983800_794192833955569_1199485730900769114_n.jpg?_nc_cat=103&_nc_oc=AQk5zxHhhdwdXMIoO9dsVPnDI-3DEDOgOLcyaY1ta6_4Avp1UqPb0No_83OiTlaK8Xk&_nc_ht=scontent-bom1-1.xx&oh=ccf9056308c5623246aaa2ff8e1d4dad&oe=5DDAEF83" className="hoverZoomLink" />
                 </a>
-                <h1>John Doe</h1>
-                <h2>Better Visuals</h2>
               </header>
               <div className="profile-bio">
+                <h1>{ this.props.user.name }</h1>
+                <h2>{ this.props.user.instituteId }</h2>
                 <p>
-                  It takes monumental improvement for us to change how we live our lives. Design is the way we access that improvement.
+                  Webmail: { this.props.user.email }
                 </p>
               </div>
-              <ul className="profile-social-links">
+              <ul className="profile-social-links" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                 <li>
-                  <a target="_blank" href="https://www.facebook.com/creativedonut">
+                  <a target="_blank" href="https://www.facebook.com">
                     <i className="fa fa-facebook"></i>
                   </a>
                 </li>
                 <li>
-                  <a target="_blank" href="https://twitter.com/dropyourbass">
+                  <a target="_blank" href="https://twitter.com">
                     <i className="fa fa-twitter"></i>
                   </a>
                 </li>
                 <li>
-                  <a target="_blank" href="https://github.com/vipulsaxena">
+                  <a target="_blank" href="https://github.com">
                     <i className="fa fa-github"></i>
-                  </a>
-                </li>
-                <li>
-                  <a target="_blank" href="https://www.behance.net/vipulsaxena">
-                    <i className="fa fa-behance"></i>
                   </a>
                 </li>
               </ul>
@@ -97,4 +67,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect( mapStateToProps, { updateUser, signOut } )(Profile);
+export default connect( mapStateToProps, {} )(Profile);

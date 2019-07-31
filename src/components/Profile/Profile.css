@@ -1,12 +1,12 @@
+/* 172.16.26.43/img/1801ee03.jpg */
 .wrapper{
   position: relative;
   width: 100%;
   height: calc(100vh - 64px);
+  background: red;
 }
 .main-profile {
   overflow: hidden;
-  background: #bcdee7 url("https://picsum.photos/400/200") no-repeat center center fixed;
-  background-size: cover;
   padding: 0px;
   margin: 0px;
   position: relative;
@@ -77,12 +77,13 @@ p {
 
 .profile-card header {
   width: 179px;
-  height: 280px;
+  height: 320px;
   padding: 40px 20px 30px 20px;
   display: inline-block;
   float: left;
   border-right: 2px dashed #EEEEEE;
-  background: #FFFFFF;
+  background: url("https://scontent-bom1-1.xx.fbcdn.net/v/t1.0-9/64510565_1201765810002934_1370836089232687104_n.jpg?_nc_cat=105&_nc_oc=AQlXTOOq4WA1JTUQjGJsf6yewJBPZKZY3au0SFpn0EIrRnMLjkKR4IGETcBFnRnqnCc&_nc_ht=scontent-bom1-1.xx&oh=6f722e64aea498e102f5d67ab52588b8&oe=5DA39117") no-repeat center center;
+  background-size: cover;
   color: #000000;
   margin-top: 50px;
   opacity: 0;
@@ -156,7 +157,6 @@ p {
 .profile-social-links {
   width: 218px;
   display: inline-block;
-  float: right;
   margin: 0px;
   padding: 15px 20px;
   background: #FFFFFF;
@@ -331,7 +331,7 @@ p {
   }
   100% {
     width: 440px;
-    height: 280px;
+    height: 350px;
     background: #FFFFFF;
     -webkit-border-radius: 4px;
   }
@@ -346,7 +346,7 @@ p {
   }
   100% {
     width: 440px;
-    height: 280px;
+    height: 350px;
     background: #FFFFFF;
     border-radius: 4px;
   }
@@ -480,7 +480,7 @@ p {
       -webkit-border-radius: 4px;
     }
     100% {
-      width: 280px;
+      width: 350px;
       height: 440px;
       background: #FFFFFF;
       -webkit-border-radius: 4px;
@@ -494,7 +494,7 @@ p {
       border-radius: 4px;
     }
     100% {
-      width: 280px;
+      width: 350px;
       height: 440px;
       background: #FFFFFF;
       border-radius: 4px;
