@@ -2,165 +2,55 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import LoginRequired from '../LoginRequired/LoginRequired';
+import ActiveRequired from '../ActiveRequired/ActiveRequired';
 
-import {updateUser} from '../../redux/actions/userActions';
-import {signOut} from '../../redux/actions/authActions';
+import './Profile.css';
 
 class Profile extends Component {
-  state={
-    email: '',
-    instituteId: '',
-    name: '',
-    phone: '',
-    newpassword: '',
-    confnewpassword: '',
-    alertMessage: ''
-  }
-
-  signOut= async ()=> {
-    await this.props.signOut();
-    if(!this.props.isAuthenticated) {
-      this.props.history.push('/');
-    }
-  }
-
-  onChange=(e)=>{
-    this.setState({[e.target.name]: e.target.value})
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    if ( this.state.newpassword!=="" && this.state.confnewpassword==="" ) {
-      this.setState({
-        alertMessage: "Please confirm your password !!!"
-      })
-      return;
-    }
-    if ( this.state.newpassword==="" && this.state.confnewpassword!=="" ) {
-      this.setState({
-        alertMessage: "Please enter both password fields !!!"
-      })
-      return;
-    }
-    if ( this.state.newpassword!==this.state.confnewpassword ) {
-      this.setState({
-        alertMessage: "Password do not match !!!"
-      })
-      return;
-    }
-    let body={};
-    if ( this.state.name!=="" ) {
-      body.name=this.state.name;
-    }
-    if ( this.state.email!=="" ) {
-      body.email=this.state.email;
-    }
-    if ( this.state.instituteId!=="" ) {
-      body.instituteId=this.state.instituteId;
-    }
-    if ( this.state.newpassword!=="" ) {
-      body.password=this.state.newpassword;
-    }
-    this.setState({
-      alertMessage: null
-    })
-    const update={
-      updatedUser: body,
-      userId: this.props.user._id
-    }
-    this.props.updateUser(update);
-  }
 
   render() {
     
     if(this.props.isAuthenticated) {
-      const { newpassword, confnewpassword, alertMessage } = this.state;
-      const { email, name, instituteId } = this.props.user;
       return (
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <p>Name: {this.props.user.name}</p>
-              <p>Email: {this.props.user.email}</p>
-              <p>InstituteId: {this.props.user.instituteId}</p>
-              <p>Batch: {this.props.user.batch}</p>
-              <p>Branch: {this.props.user.branch}</p>
-              <p>Phone: {this.props.user.phone}</p>
-            </div>
-            <button className="btn btn-danger" onClick={this.signOut}>SignOut</button>
-          </div>
-          <h3 className="text-center">Update Profile</h3>
-          <div className="row d-flex justify-content-center">
-            <div className="col-md-8">
-              <div className="container shadow">
-              {alertMessage ? <div className="alert alert-danger">{alertMessage}</div> : null}
-                <form onSubmit={this.handleSubmit} style={{padding: "20px", margin: "20px"}}>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input 
-                      name="email"
-                      id="emal"
-                      placeholder="Enter email"
-                      className="form-control"
-                      type="email"
-                      defaultValue={ email }
-                      onChange={ this.onChange }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input 
-                      name="name"
-                      id="name"
-                      placeholder="Enter name"
-                      className="form-control"
-                      type="text"
-                      defaultValue={ name }
-                      onChange={ this.onChange }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="instituteId">InstituteId</label>
-                    <input 
-                      name="instituteId"
-                      id="instituteId"
-                      placeholder="Enter instituteId"
-                      className="form-control"
-                      type="text"
-                      defaultValue={ instituteId }
-                      onChange={ this.onChange }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">New Password</label>
-                    <input 
-                      name="newpassword"
-                      id="newpassword"
-                      placeholder="Enter new password"
-                      className="form-control"
-                      type="password"
-                      value={ newpassword }
-                      onChange={ this.onChange }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="rePassword">Re-enter New Password</label>
-                    <input 
-                      name="confnewpassword"
-                      id="confnewpassword"
-                      placeholder="Re-enter password"
-                      className="form-control"
-                      type="password"
-                      value={ confnewpassword }
-                      onChange={ this.onChange }
-                    />
-                  </div>
-                  <button className="btn btn-success" type="submit">Update Profile</button>
-                </form>
+        <div className="wrapper" style={{background: "red"}}>
+          <div className="main-profile">
+            <aside className="profile-card">
+              <header>
+                <a target="_blank" href="#">
+                  <img src="https://scontent-bom1-1.xx.fbcdn.net/v/t1.0-9/983800_794192833955569_1199485730900769114_n.jpg?_nc_cat=103&_nc_oc=AQk5zxHhhdwdXMIoO9dsVPnDI-3DEDOgOLcyaY1ta6_4Avp1UqPb0No_83OiTlaK8Xk&_nc_ht=scontent-bom1-1.xx&oh=ccf9056308c5623246aaa2ff8e1d4dad&oe=5DDAEF83" className="hoverZoomLink" />
+                </a>
+              </header>
+              <div className="profile-bio">
+                <h1>{ this.props.user.name }</h1>
+                <h2>{ this.props.user.instituteId }</h2>
+                <p>
+                  Webmail: { this.props.user.email }
+                </p>
               </div>
-            </div>
+              <ul className="profile-social-links" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <li>
+                  <a target="_blank" href="https://www.facebook.com">
+                    <i className="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li>
+                  <a target="_blank" href="https://twitter.com">
+                    <i className="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a target="_blank" href="https://github.com">
+                    <i className="fa fa-github"></i>
+                  </a>
+                </li>
+              </ul>
+            </aside>
           </div>
         </div>
+      )
+    } else if (this.props.user.active === 0) {
+      return (
+        <ActiveRequired/>
       )
     } else {
       return (
@@ -177,4 +67,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect( mapStateToProps, { updateUser, signOut } )(Profile);
+export default connect( mapStateToProps, {} )(Profile);
