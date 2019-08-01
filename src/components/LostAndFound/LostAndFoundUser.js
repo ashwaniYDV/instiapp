@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Avatar, Card, CardHeader, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Fab } from '@material-ui/core';
+import { Avatar, Card, CardMedia, CardHeader, CardContent, IconButton, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Fab } from '@material-ui/core';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
@@ -90,7 +90,7 @@ class LostAndFoundUser extends Component {
               style={{background: '#eee'}}
               avatar={
                 <Avatar aria-label="Recipe" className={classes.avatar}>
-                  R
+                  {lostnfound.name[0].toUpperCase()}
                 </Avatar>
               }
               action={
@@ -99,13 +99,14 @@ class LostAndFoundUser extends Component {
                 </IconButton>
               }
               title={lostnfound.name}
-              subheader="September 14, 2016"
+              subheader={`${lostnfound.date}, ${lostnfound.time}`}
             />
-            {/* <CardMedia
+            { lostnfound.image !== undefined ? <CardMedia
               className={classes.media}
-              image="/static/images/cards/paella.jpg"
-              title="Paella dish"
-            /> */}
+              image={lostnfound.image}
+              title="Lost n found"
+            /> : null
+            }
             <CardContent>
               <Typography variant="h6">Name:</Typography>
               {lostnfound.name}

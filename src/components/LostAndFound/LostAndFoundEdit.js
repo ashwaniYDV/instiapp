@@ -15,7 +15,8 @@ const { TextArea } = Input;
 class LostAndFoundEdit extends React.Component {
 
     state = {
-        msg: null
+        msg: null,
+        loading: false
     }
 
     componentDidUpdate(prevProps) {
@@ -50,6 +51,9 @@ class LostAndFoundEdit extends React.Component {
     };
 
     editPost = async (data) => {
+        this.setState({
+            loading: true
+        });
         let lostnfoundId = this.props.location.state.lostnfound._id;
         console.log(lostnfoundId, data);
         await this.props.editLostnfounds({data, lostnfoundId});
@@ -68,20 +72,6 @@ class LostAndFoundEdit extends React.Component {
                     <div style={{margin: 'auto', maxWidth: '550px', padding: '20px 50px'}}>
                         <h3 className="text-center">Edit Lost-n-found</h3>
                         {msg ? <Alert message={msg} type="error" /> : null}
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Item label="Lost-n-found Status">
-                                {getFieldDecorator('lostStatus', {
-                                rules: [{ required: true, message: 'Please select status' }],
-                                })(
-                                <Select
-                                    placeholder="Select status"
-                                >
-                                    <Option value='1'>You have lost this item</Option>
-                                    <Option value='2'>You have found this item</Option>
-                                    <Option value='3'>Item has been recovered</Option>
-                                </Select>,
-                                )}
-                            </Form.Item>
                             <Form.Item label="Name of item">
                             {getFieldDecorator('name', {
                                 rules: [{ required: true, message: 'Please enter item name!' }],
@@ -153,8 +143,22 @@ class LostAndFoundEdit extends React.Component {
                                 <TimePicker/>
                             )}
                             </Form.Item>
+                            <Form onSubmit={this.handleSubmit}>
+                            <Form.Item label="Lost-n-found Status">
+                                {getFieldDecorator('lostStatus', {
+                                rules: [{ required: true, message: 'Please select status' }],
+                                })(
+                                <Select
+                                    placeholder="Select status"
+                                >
+                                    <Option value='1'>You have lost this item</Option>
+                                    <Option value='2'>You have found this item</Option>
+                                    <Option value='3'>Item has been recovered</Option>
+                                </Select>,
+                                )}
+                            </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit">Edit Post</Button>
+                                <Button type="primary" htmlType="submit" loading={this.state.loading}>Edit Post</Button>
                             </Form.Item>
                         </Form>
                     </div>

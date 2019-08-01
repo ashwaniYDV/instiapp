@@ -1,8 +1,9 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { storage } from '../../firebase';
 
-import { Form, Select, Button, Alert, DatePicker, TimePicker, Input } from 'antd';
+import { Form, Select, Button, Alert, DatePicker, TimePicker, Input, Progress } from 'antd';
 import 'antd/dist/antd.css';
 
 import LoginRequired from '../LoginRequired/LoginRequired';
@@ -14,7 +15,11 @@ const { TextArea } = Input;
 class LostAndFoundPost extends React.Component {
 
     state = {
-        msg: null
+        msg: null,
+        image: null,
+        url: '',
+        progress: null,
+        loading: false
     }
 
     componentDidUpdate(prevProps) {
@@ -32,6 +37,33 @@ class LostAndFoundPost extends React.Component {
         }
     }
 
+    onChange = (e) => {
+        this.setState({
+            image: e.target.files[0]
+        });
+    }
+
+    uploadImage = (e) => {
+        e.preventDefault();
+        let { image } = this.state;
+        if (image !== null) {
+            const uploadTask = storage.ref(`lostnfounds/${image.name}`).put(image);
+            uploadTask.on('state_changed', (snapshot) => {
+                let progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                this.setState({progress: progress});
+            }, (error) => {
+                console.log(error);
+            }, () => {
+                storage.ref('lostnfounds').child(image.name).getDownloadURL().then(url => {
+                    console.log(url);
+                    this.setState({
+                        url: url
+                    });
+                })
+            });
+        }
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, fieldsValue) => {
@@ -42,6 +74,9 @@ class LostAndFoundPost extends React.Component {
                 'time': fieldsValue['time'].format('HH:mm:ss'),
             };
             values.lostnfoundPoster=this.props.user._id;
+            if (this.state.url !== '') {
+                values.image = this.state.url;
+            }
             console.log(values);
             this.post(values);
         }
@@ -49,6 +84,9 @@ class LostAndFoundPost extends React.Component {
     };
 
     post = async (values) => {
+        this.setState({
+            loading: true
+        });
         await this.props.postLostnfounds(values);
         this.props.history.push('/lost-n-found');
     }
@@ -85,6 +123,11 @@ class LostAndFoundPost extends React.Component {
                                 placeholder="Enter name of item"
                                 />,
                             )}
+                            </Form.Item>
+                            <Form.Item label="Upload picture">
+                                <input type="file" className="btn btn-primary" onChange={this.onChange}/>
+                                <button className="btn btn-success" onClick={this.uploadImage}>Upload</button>
+                                <Progress percent={this.state.progress} status="active" />
                             </Form.Item>
                             <Form.Item label="Place">
                             {getFieldDecorator('place', {
@@ -141,7 +184,7 @@ class LostAndFoundPost extends React.Component {
                             )}
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit">Post</Button>
+                                <Button type="primary" htmlType="submit" loading={this.state.loading}>Post</Button>
                             </Form.Item>
                         </Form>
                     </div>
