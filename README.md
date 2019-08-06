@@ -1,2 +1,2 @@
 ## IIT Patna Institute WebApp
-https://instiapp.herokuapp.com/
+https://iitpapp.herokuapp.com/
