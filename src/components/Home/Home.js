@@ -162,10 +162,10 @@ class Home extends React.Component {
           </ListItem>
           {isAuthenticated ? 
             [
-              <ListItem button key='qrcode' component={Link} to='/qrcode' onClick={this.handleDrawerClose} >
-                <Icon type="qrcode" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
-                <ListItemText primary='QR-Code' />
-              </ListItem>,
+              // <ListItem button key='qrcode' component={Link} to='/qrcode' onClick={this.handleDrawerClose} >
+              //   <Icon type="qrcode" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+              //   <ListItemText primary='QR-Code' />
+              // </ListItem>,
               <ListItem button key='lostandfound' component={Link} to='/lost-n-found' onClick={this.handleDrawerClose} >
                 <Icon type="bank" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
                 <ListItemText primary='Lost-n-found' />
