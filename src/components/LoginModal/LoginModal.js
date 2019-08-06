@@ -109,7 +109,7 @@ class LoginModal extends Component {
           
             <Form.Item>
             {getFieldDecorator('email', {
-              rules: [{ required: true, pattern: new RegExp(""), message: 'Please enter valid IIT-P webmail!' },],
+              rules: [{ required: true, pattern: new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(iitp.ac.in)"), message: 'Please enter valid IIT-P webmail!' },],
             })(
               <Input
               type="email"
