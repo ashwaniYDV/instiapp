@@ -13,6 +13,7 @@ import 'antd/dist/antd.css';
 import {  Avatar, Icon } from "antd";
 import './home.css';
 
+import About from '../About/About';
 import Profile from '../Profile/Profile';
 import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
@@ -143,10 +144,10 @@ class Home extends React.Component {
             <Icon type="star" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
             <ListItemText primary='Clubs' />
           </ListItem>
-          <ListItem button key='messmenu' component={Link} to='/mess-menu' onClick={this.handleDrawerClose} >
+          {/* <ListItem button key='messmenu' component={Link} to='/mess-menu' onClick={this.handleDrawerClose} >
             <Icon type="pie-chart" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
             <ListItemText primary='Mess-menu' />
-          </ListItem>
+          </ListItem> */}
           <ListItem button key='calender' component={Link} to='/calendar' onClick={this.handleDrawerClose} >
             <Icon type="calendar" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
             <ListItemText primary='Calender' />
@@ -180,9 +181,13 @@ class Home extends React.Component {
         </List>
         <Divider />
         <List>
-            <ListItem button key='settings' component={Link} to='/settings' onClick={this.handleDrawerClose}>
+            {/* <ListItem button key='settings' component={Link} to='/settings' onClick={this.handleDrawerClose}>
               <Icon type="setting" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
               <ListItemText primary='Setting' />
+            </ListItem> */}
+            <ListItem button key='about' component={Link} to='/about' onClick={this.handleDrawerClose} >
+              <Icon type="link" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+              <ListItemText primary='About' />
             </ListItem>
         </List>
       </div>
@@ -275,17 +280,18 @@ class Home extends React.Component {
           {this.props.user && this.props.user.active ===0 ? <ActiveRequired /> : null}
           <Route exact path="/" component={Feeds} />
           <Switch>
+            <Route exact path="/about" component={About} />
             <Route exact path="/feeds" component={Feeds} />
             <Route exact path="/feed/:feedId" component={Feed} />
             <Route exact path="/clubs" component={Clubs} />
             <Route exact path="/club/:clubId" component={Club} />
             <Route exact path="/calendar" component={Calendar} />
-            <Route exact path="/mess-menu" component={MessMenu} />
+            {/* <Route exact path="/mess-menu" component={MessMenu} /> */}
             <Route exact path="/map" component={Map} />
             <Route exact path="/qrcode" component={Qrcode} />
             <Route exact path="/useful-links" component={UsefulLinks} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/settings" component={Settings} />
+            {/* <Route exact path="/settings" component={Settings} /> */}
             <Route exact path="/lost-n-found/post" component={LostAndFoundPost} />
             <Route exact path="/lost-n-found/edit" component={LostAndFoundEdit} />
             <Route path="/lost-n-found" component={LostAndFound} />
