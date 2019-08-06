@@ -81,17 +81,17 @@ class Clubs extends Component {
                                 {club.name[0]}
                                 </Avatar>
                             }
-                            action={
-                                <IconButton>
-                                <MoreVertIcon />
-                                </IconButton>
-                            }
+                            // action={
+                            //     <IconButton>
+                            //     <MoreVertIcon />
+                            //     </IconButton>
+                            // }
                             title={club.name}
                             subheader={club.bio}
                             />
                             <CardMedia
                             className={classes.media}
-                            image="https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef"
+                            image= {club.image ? club.image : "https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef"} 
                             title="IIT-P Club"
                             />
                             <CardContent>

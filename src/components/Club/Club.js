@@ -66,7 +66,7 @@ class Club extends Component {
                             >
                             </PageHeader>
                             <div style={{width: '100%'}}>
-                                <img src='https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef' width="100%" alt='Club' />
+                                <img src={clubData.image ? clubData.image : 'https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef'} width="100%" alt='Club' />
                             </div>
                             <div className="content" style={{padding: '20px'}}>
                                 <div className="header">
@@ -78,13 +78,14 @@ class Club extends Component {
                                 <Chip color="secondary" label={clubData.bio} />
                                 <IconButton aria-label="Add to favorites">
                                 <FavoriteIcon />
-                                <span>{clubData.followers}</span>
+                                {/* <span>{clubData.followers}</span> */}
                                 </IconButton>
-                                <Typography variant="subtitle1" gutterBottom>Description :</Typography>
+                                <h4 gutterBottom>Description :</h4>
                                 <Typography variant="body1" gutterBottom style={{fontSize:20}}>
-                                    {clubData.description.substr(100)}
+                                    {clubData.description}
                                 </Typography>
-                                <Typography variant="subtitle1" gutterBottom>Our Coordinators :</Typography>
+                                {/* <h4>Our Coordinators :</h4> */}
+
                                 {/* <Typography variant="body1" gutterBottom className="List">
                                     {coordinators}
                                 </Typography>
@@ -93,7 +94,7 @@ class Club extends Component {
                                     {SubCoordinators}
                                 </Typography> */}
                                 <Typography variant="h6" component="h2" gutterBottom>
-                                    <a href={clubData.website}>Visit Our Website</a>
+                                    Visit Our Website: <a href={clubData.website}>{clubData.website}</a>
                                 </Typography>
                                 </div>
                             </div>
