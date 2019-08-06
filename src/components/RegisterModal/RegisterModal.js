@@ -125,23 +125,23 @@ class RegisterModal extends Component {
             </Form.Item>
             <Form.Item>
               {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please enter email!' }, { type: 'email', message: 'Please enter valid email!' },],
+                rules: [{ required: true, pattern: new RegExp(""), message: 'Please enter valid IIT-P webmail!' },],
               })(
                 <Input
                   type="email"
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Email"
+                  placeholder="IIT-P Webmail Eg xxxx@iitp.ac.in"
                 />,
               )}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator('instituteId', {
-                rules: [{ required: true, message: 'Please enter your instituteId!' }],
+                rules: [{ required: true, message: 'Please enter your IIT-P Roll no.!' }],
               })(
                 <Input
                   type="text"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Institute Id"
+                  placeholder="IIT-P Roll no."
                 />,
               )}
             </Form.Item>

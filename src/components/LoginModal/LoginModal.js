@@ -109,12 +109,12 @@ class LoginModal extends Component {
           
             <Form.Item>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please enter your email!' }, { type: 'email', message: 'Please enter valid email!' },],
+              rules: [{ required: true, pattern: new RegExp(""), message: 'Please enter valid IIT-P webmail!' },],
             })(
               <Input
               type="email"
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Email"
+                placeholder="IIT-P Webmail Eg xxxx@iitp.ac.in"
               />,
             )}
           </Form.Item>
