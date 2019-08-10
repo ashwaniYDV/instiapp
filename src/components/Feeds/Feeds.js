@@ -49,27 +49,27 @@ class Feeds extends Component {
         const { classes, feeds } = this.props;
         const { msg } = this.state;
         const feedList = this.props.feed.feeds && !this.props.feed.feedsLoading ? (feeds.map((feed) => {
-            let date=new Date(feed.eventDate).toDateString().toString();
-			return (
-                <Link to={`/feed/${feed._id}`} key={feed._id}>
-                    <Paper className={classes.root} elevation={1}>
-                        <Typography variant="h6" component="h3">
-                            {feed.eventName}
-                        </Typography>
-                        <small className="text-muted">{date}</small><br/><br/>
-                        <Typography component="p">
-                            {feed.eventDescription.substr(0,200)} 
-                            {feed.eventDescription.length>200 ? <span> [...]</span> : null}
-                        </Typography>
-                    </Paper>
-                </Link>
-			)
-		})
-		) : (
-				[<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} key="spinner">
-					<Spin tip="Loading..." size="large" ></Spin>
-				</div>]
-			)
+          let date=new Date(feed.eventDate).toDateString().toString();
+          return (
+            <Link to={`/feed/${feed._id}`} key={feed._id}>
+                <Paper className={classes.root} elevation={1}>
+                    <Typography variant="h6" component="h3">
+                        {feed.eventName}
+                    </Typography>
+                    <small className="text-muted">{date}</small><br/><br/>
+                    <Typography component="p">
+                        {feed.eventDescription.substr(0,200)} 
+                        {feed.eventDescription.length>200 ? <span> [...]</span> : null}
+                    </Typography>
+                </Paper>
+            </Link>
+          )
+        })
+        ) : (
+            [<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} key="spinner">
+              <Spin tip="Loading..." size="large" ></Spin>
+            </div>]
+          )
         
         return (
             <div style={{margin: '20px', maxWidth: '600px'}}>
