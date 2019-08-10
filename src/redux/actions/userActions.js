@@ -8,9 +8,6 @@ export const updateUser = ({ updatedUser, userId }) => {
     return async (dispatch, getState) => {
         try {
           const res = await Axios.patch(`${serverUrl}/users/${userId}`, updatedUser, tokenConfig(getState));
-          console.log(res.data);
-          console.log(res.status);
-
           dispatch({
               type: USER_UPDATE,
               payload: { user: res.data.user, status: res.status}
