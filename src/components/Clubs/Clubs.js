@@ -18,7 +18,9 @@ import {getAllClubs} from '../../redux/actions/clubActions';
 
 const styles = theme => ({
     card: {
-      maxWidth: 400,
+      width: "100%",
+      boxShadow: "5px 5px 5px 5px rgba(0,0,0,.3)",
+      marginBottom: "30px"
     },
     media: {
       height: 0,
@@ -26,16 +28,6 @@ const styles = theme => ({
     },
     actions: {
       display: 'flex',
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
     },
     avatar: {
       backgroundColor: red[500],
@@ -68,57 +60,60 @@ class Clubs extends Component {
     }
 
     render () {
-        const { classes, clubs } = this.props;
-        const { msg } = this.state;
-        const clubList = this.props.club.clubs && !this.props.club.clubsLoading ? (clubs.map((club) => {
+      const { classes, clubs } = this.props;
+      const { msg } = this.state;
+      const clubList = this.props.club.clubs && !this.props.club.clubsLoading ? (clubs.map((club) => {
 			return (
-                <Col sm={24} lg={12} style={{padding: '20px', display: 'flex', justifyContent: 'center'}} key={club._id} >
-                    <Link to={`/club/${club._id}`}>
-                        <Card className={classes.card}>
-                            <CardHeader
-                            avatar={
-                                <Avatar aria-label="Recipe" className={classes.avatar}>
-                                {club.name[0]}
-                                </Avatar>
-                            }
-                            // action={
-                            //     <IconButton>
-                            //     <MoreVertIcon />
-                            //     </IconButton>
-                            // }
-                            title={club.name}
-                            subheader={club.bio}
-                            />
-                            <CardMedia
-                            className={classes.media}
-                            image= {club.image ? club.image : "https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef"} 
-                            title="IIT-P Club"
-                            />
-                            <CardContent>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    {club.description.substr(0,200)}...
-                                </Typography>
-                            </CardContent>
-                            <CardActions className={classes.actions}>
-                                <Icon  style={{padding:10, fontSize: '20px', color: 'blue'}} type="facebook" />
-                                <Icon  style={{padding:10, fontSize: '20px', color: 'green'}} type="linkedin" />
-                                <Icon  style={{padding:10, fontSize: '20px', color: 'pink'}} type="instagram" />
-                                <Icon  style={{padding:10, fontSize: '20px', color: 'blue'}} type="twitter" />
-                                <IconButton aria-label="Add to favorites">
-                                    <FavoriteIcon />
-                                    <span style={{padding:10}}>{club.followers}</span>
-                                </IconButton>
-                                <IconButton aria-label="Share">
-                                    <ShareIcon />
-                                </IconButton>
-                            </CardActions>
-                        </Card>
-                    </Link>
-                </Col>
+        <div className="col-lg-4" key={club._id} >
+            
+          <Card className={classes.card}>
+            <Link to={`/club/${club._id}`}>
+              <CardHeader
+              avatar={
+                  <Avatar aria-label="Recipe" className={classes.avatar}>
+                  {club.name[0]}
+                  </Avatar>
+              }
+              // action={
+              //     <IconButton>
+              //     <MoreVertIcon />
+              //     </IconButton>
+              // }
+              title={club.name}
+              subheader={club.bio}
+              />
+            </Link>
+            <Link to={`/club/${club._id}`}>
+              <CardMedia
+              className={classes.media}
+              image= {club.image ? club.image : "https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef"} 
+              title="IIT-P Club"
+              />
+            </Link>
+              {/* <CardContent>
+                  <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                  >
+                      {club.description.substr(0,200)}...
+                  </Typography>
+              </CardContent> */}
+              <CardActions className={classes.actions}>
+                <Icon  style={{padding:10, fontSize: '20px', color: 'blue'}} type="facebook" />
+                <Icon  style={{padding:10, fontSize: '20px', color: 'green'}} type="linkedin" />
+                <Icon  style={{padding:10, fontSize: '20px', color: 'pink'}} type="instagram" />
+                <Icon  style={{padding:10, fontSize: '20px', color: 'blue'}} type="twitter" />
+                <IconButton aria-label="Add to favorites">
+                    <FavoriteIcon />
+                    <span style={{padding:10}}>{club.followers}</span>
+                </IconButton>
+                {/* <IconButton aria-label="Share">
+                    <ShareIcon />
+                </IconButton> */}
+              </CardActions>
+          </Card>
+        </div>
 			)
 		})
 		) : (
@@ -130,9 +125,11 @@ class Clubs extends Component {
         return (
             <div style={{margin: '20px'}}>
                 {msg ? <Alert message={msg} type="error" /> : null}
-                <Row>
+                <div className="container-fluid">
+                  <div className="row d-flex justify-content-center">
                     {clubList.length ? clubList : <Alert message="No clubs found!" type='warning' />}
-                </Row>
+                  </div>
+                </div>
             </div>
         );
     }

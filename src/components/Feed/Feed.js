@@ -3,10 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
-import { Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import { Row, Col, Skeleton, PageHeader, Button, Alert } from 'antd';
+import { Row, Col, Skeleton, PageHeader, Alert } from 'antd';
 import 'antd/dist/antd.css';
 
 import {getFeed} from '../../redux/actions/feedActions';
@@ -58,7 +57,7 @@ class Feed extends Component {
                 typographer: true
               });
             result = md.render(feedData.eventDescription);
-            // doc = new DOMParser().parseFromString(result, "text/xml");
+            doc = new DOMParser().parseFromString(result, "text/xml");
 
         }
         const feed = feedData && !this.props.feed.feedLoading ? (
@@ -69,7 +68,7 @@ class Feed extends Component {
                         <div className="column-1">
                         <PageHeader
                                 onBack={() => window.history.back()}
-                                title={<span style={{color: '#fff'}}>{feedData.eventName}</span>}
+                                title={<h5 style={{color: '#fff'}}>{feedData.eventName}</h5>}
                                 style={{background: '#1F80C8', color: '#fff', padding: '5px'}}
                             >
                             </PageHeader>
@@ -86,16 +85,18 @@ class Feed extends Component {
                             >
                                 <p style={{color: '#fff'}}>Venue: {feedData.eventVenue}</p>
                             </PageHeader>
-                            <p>Posted by: {feedData.feedPoster.name}</p>
+                            <div style={{padding: "20px"}}>
+                                <h5>Posted by: {feedData.feedPoster.name}</h5>
+                                <p>{feedData.feedPoster.instituteId}</p>
+                            </div>
                         </div>
                     </Col>
                     <Col md={24} lg={12}>
                         <div className="column-2">
-                            <h3>{feedData.eventName}</h3>
-                            {/* <div style={{width: '100%', position: 'relative'}}>
+                            <h3 className="text-center text-primary" style={{textDecoration: "underline"}}>{feedData.eventName}</h3>
+                            <div style={{width: '100%', position: 'relative'}}>
                                 <div dangerouslySetInnerHTML={{__html: result}} style={{position: 'absolute'}}></div>
-                            </div> */}
-                            <paper>{feedData.eventDescription}</paper>
+                            </div>
                         </div>
                     </Col>
                 </Row>

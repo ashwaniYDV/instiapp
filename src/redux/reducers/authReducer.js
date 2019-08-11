@@ -79,6 +79,7 @@ export default (state=DEFAULT_STATE,action)=>{
             ...state,
             isLoading: false,
             isAuthenticated: false,
+            user: null
             };
         case OPEN_LOGIN_MODAL:
             return {

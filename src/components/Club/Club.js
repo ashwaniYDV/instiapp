@@ -102,20 +102,20 @@ class Club extends Component {
                     </Col>
                     <Col md={24} lg={12}>
                         <div className="column-2">
-                            <h3 style={{textAlign: 'center'}}>Feeds of {clubData.name}</h3>
-                            {clubData.events.map((feed) => {
-                                console.log(feed);
-                                let date=new Date(feed.eventDate).toDateString().toString();
+                            <h3 style={{textAlign: 'center'}}>Events of {clubData.name}</h3>
+                            {clubData.events.map((event) => {
+                                console.log(event);
+                                let date=new Date(event.eventDate).toDateString().toString();
                                 return (
-                                    <Link to={`/feed/${feed._id}`} key={feed._id}>
+                                    <Link to={`/event/${event._id}`} key={event._id}>
                                         <Paper className={classes.paper} elevation={1}>
                                             <Typography variant="h6" component="h3">
-                                                {feed.eventName}
+                                                {event.name}
                                             </Typography>
                                             <small className="text-muted">{date}</small><br/><br/>
                                             <Typography component="p">
-                                                {feed.eventDescription.substr(0,200)} 
-                                                {feed.eventDescription.length>200 ? <span> [...]</span> : null}
+                                                {event.description.substr(0,200)} 
+                                                {event.description.length>200 ? <span> [...]</span> : null}
                                             </Typography>
                                         </Paper>
                                     </Link>
