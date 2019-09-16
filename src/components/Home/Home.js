@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {AppBar, Button, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Toolbar,Typography, Fab} from '@material-ui/core';
+import {AppBar, Button, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Toolbar,Typography, Fab, Tooltip} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -20,6 +20,9 @@ import LoginModal from '../LoginModal/LoginModal';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import Feeds from '../Feeds/Feeds';
 import Feed from '../Feed/Feed';
+import FeedPost from '../Feed/FeedPost';
+import FeedEdit from '../Feed/FeedEdit';
+import FeedUser from '../Feed/FeedUser';
 import Clubs from '../Clubs/Clubs';
 import Club from '../Club/Club';
 import MessMenu from '../MessMenu/MessMenu';
@@ -150,7 +153,7 @@ class Home extends React.Component {
             <ListItemText primary='Mess-menu' />
           </ListItem> */}
           <ListItem button key='calender' component={Link} to='/calendar' onClick={this.handleDrawerClose} >
-            <Icon type="calendar" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;  
+            <Icon type="calendar" style={{fontWeight: 'bold', color: 'black'}} /> &nbsp;&nbsp;
             <ListItemText primary='Calender' />
           </ListItem>
           <ListItem button key='map' component={Link} to='/map' onClick={this.handleDrawerClose} >
@@ -218,9 +221,11 @@ class Home extends React.Component {
             {openregisterModal ? <RegisterModal /> : null}
 
             {isAuthenticated && (
-              <Fab size="small" color="secondary" aria-label="Add" className={classes.margin} >
-                <AddIcon />
-              </Fab>
+              <Tooltip title="Post feed" aria-label="Post feed">
+                <Fab size="small" color="secondary" aria-label="Add" className={classes.margin} component={Link} to='/feedpost' >
+                  <AddIcon />
+                </Fab>
+              </Tooltip>
             )}
 
             {isAuthenticated && (
@@ -230,7 +235,6 @@ class Home extends React.Component {
                   aria-haspopup="true"
                   onClick={this.handleMenu}
                   color="inherit"
-                  size="medium"
                 >
                   <AccountCircle />
                 </IconButton>
@@ -249,6 +253,7 @@ class Home extends React.Component {
                   onClose={this.handleClose}
                 >
                   <MenuItem onClick={this.handleClose} component={Link} to='/profile'>Profile</MenuItem>
+                  <MenuItem onClick={this.handleClose} component={Link} to='/userfeeds'>My Feeds</MenuItem>
                   <MenuItem onClick={this.handleCloseAndSignout }>Sign Out</MenuItem>
                 </Menu>
               </div>
@@ -291,6 +296,9 @@ class Home extends React.Component {
             <Route exact path="/about" component={About} />
             <Route exact path="/feeds" component={Feeds} />
             <Route exact path="/feed/:feedId" component={Feed} />
+            <Route exact path="/feedpost" component={FeedPost} />
+            <Route exact path="/userfeeds" component={FeedUser} />
+            <Route exact path="/editfeed" component={FeedEdit} />
             <Route exact path="/clubs" component={Clubs} />
             <Route exact path="/club/:clubId" component={Club} />
             <Route exact path="/calendar" component={Calendar} />

@@ -1,4 +1,4 @@
-import { FEEDS_LOADING, FEED_LOADING, ALL_FEEDS_SUCCESS, ALL_FEEDS_FAIL, FEED_SUCCESS, FEED_FAIL } from "../actions/types";
+import { FEEDS_LOADING, FEED_LOADING, ALL_FEEDS_SUCCESS, ALL_FEEDS_FAIL, FEED_SUCCESS, FEED_FAIL, POST_FEED_SUCCESS, POST_FEED_FAIL } from "../actions/types";
 
 const DEFAULT_STATE={
     feeds: null,
@@ -45,6 +45,20 @@ export default (state=DEFAULT_STATE,action)=>{
             return {
                 ...state, 
                 feed: null,
+                status: action.payload.status,
+                feedLoading: false
+            }
+        case POST_FEED_FAIL:
+            return {
+                ...state, 
+                feed: null,
+                status: action.payload.status,
+                feedLoading: false
+            }
+        case POST_FEED_SUCCESS:
+            return {
+                ...state, 
+                feed: action.payload.feed,
                 status: action.payload.status,
                 feedLoading: false
             }

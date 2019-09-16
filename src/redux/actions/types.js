@@ -26,6 +26,10 @@ export const ALL_FEEDS_SUCCESS = 'ALL_FEEDS_SUCCESS';
 export const ALL_FEEDS_FAIL = 'ALL_FEEDS_FAIL';
 export const FEED_SUCCESS = 'FEED_SUCCESS';
 export const FEED_FAIL = 'FEED_FAIL';
+export const POST_FEED_SUCCESS = 'POST_FEED_SUCCESS';
+export const POST_FEED_FAIL = 'POST_FEED_FAIL';
+export const EDIT_FEED_SUCCESS = 'EDIT_FEED_SUCCESS';
+export const EDIT_FEED_FAIL = 'EDIT_FEED_FAIL';
 
 export const CLUBS_LOADING = 'CLUBS_LOADING';
 export const CLUB_LOADING = 'CLUB_LOADING';
