@@ -4,19 +4,27 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
-import { Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-import { Spin, Alert } from 'antd';
+import { Spin, Alert, Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 
 import {getAllFeeds} from '../../redux/actions/feedActions';
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    padding: theme.spacing(2),
-    margin: theme.spacing(2),
+  card: {
+    maxWidth: 400,
+  },
+  media: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover',
   },
 });
 
@@ -52,16 +60,38 @@ class Feeds extends Component {
           let date=new Date(feed.eventDate).toDateString().toString();
           return (
             <Link to={`/feed/${feed._id}`} key={feed._id}>
-                <Paper className={classes.root} elevation={1}>
-                    <Typography variant="h6" component="h3">
+              <div style={{margin: "0px 0px 25px"}}>
+                <Card className={classes.card}>
+                  <CardActionArea>
+                    {feed.eventImageUrl && feed.eventImageUrl!=="placeholder" ? (
+                      <CardMedia
+                        component="img"
+                        alt={feed.name}
+                        className={classes.media}
+                        height="140"
+                        image={feed.eventImageUrl}
+                        title={feed.eventImageUrl}
+                      />
+                    ) : null
+                    }
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
                         {feed.eventName}
-                    </Typography>
-                    <small className="text-muted">{date}</small><br/><br/>
-                    <Typography component="p">
+                      </Typography>
+                      <small className="text-muted">{date}</small><br/><br/>
+                      <Typography component="p">
                         {feed.eventDescription.substr(0,200)} 
                         {feed.eventDescription.length>200 ? <span> [...]</span> : null}
-                    </Typography>
-                </Paper>
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      See More
+                    </Button>
+                  </CardActions>
+                </Card>
+              </div>  
             </Link>
           )
         })

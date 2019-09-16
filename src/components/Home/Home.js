@@ -4,8 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {AppBar, Button, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Toolbar,Typography} from '@material-ui/core';
+import {AppBar, Button, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Toolbar,Typography, Fab} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import AddIcon from '@material-ui/icons/Add';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -217,12 +218,19 @@ class Home extends React.Component {
             {openregisterModal ? <RegisterModal /> : null}
 
             {isAuthenticated && (
+              <Fab size="small" color="secondary" aria-label="Add" className={classes.margin} >
+                <AddIcon />
+              </Fab>
+            )}
+
+            {isAuthenticated && (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : undefined}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
                   color="inherit"
+                  size="medium"
                 >
                   <AccountCircle />
                 </IconButton>

@@ -73,7 +73,7 @@ class Feed extends Component {
                             >
                             </PageHeader>
                             <div style={{width: '100%'}}>
-                                <img src={feedData.eventImageUrl ? feedData.eventImageUrl : 'https://qph.fs.quoracdn.net/main-qimg-6f0f383fdcb93eb05d3c87670fcb6cef'} width="100%" alt='Feed' />
+                                <img src={feedData.eventImageUrl && feedData.eventImageUrl!=="placeholder" ? feedData.eventImageUrl : 'https://scontent.fdel29-1.fna.fbcdn.net/v/t1.0-9/64510565_1201765810002934_1370836089232687104_n.jpg?_nc_cat=105&_nc_oc=AQm1dYIYf4n1QhQ2HDA3GiSuqMoElJjqL2R7pV-NAT8HYNSg3nH2DF7QfGtWfZZMJgM&_nc_ht=scontent.fdel29-1.fna&oh=9e7ecab1880ea2f466386bc7d66e93d5&oe=5DF2AB17'} width="100%" alt='Feed' />
                             </div>
                             <PageHeader
                                 title={<span style={{color: '#fff'}}>{new Date(feedData.eventDate).toDateString().toString()}</span>}
